@@ -8,26 +8,35 @@ namespace rm.Trie
     internal class TrieNode
     {
         #region data members
-        
+
         /// <summary>
         /// The character for the TrieNode.
         /// </summary>
         internal char Character { get; private set; }
-        
+
         /// <summary>
         /// Children Character->TrieNode map.
         /// </summary>
         internal IDictionary<char, TrieNode> Children { get; private set; }
-        
+
         /// <summary>
         /// Boolean to indicate whether the root to this node forms a word.
         /// </summary>
-        internal bool IsWord { get; set; }
-        
+        internal bool IsWord
+        {
+            get { return WordCount > 0; }
+        }
+
         /// <summary>
         /// The count of words for the TrieNode.
         /// </summary>
         internal int WordCount { get; set; }
+
+        /// <summary>
+        /// Parent TrieNode of this TrieNode.
+        /// </summary>
+        /// <remarks>Required to easily remove word from Trie.</remarks>
+        internal TrieNode Parent { get; set; }
 
         #endregion
 
@@ -40,13 +49,13 @@ namespace rm.Trie
         /// <param name="children">Children of TrieNode.</param>
         /// <param name="isWord">If root TrieNode to this TrieNode is a word.</param>
         /// <param name="wordCount"></param>
-        internal TrieNode(char character, IDictionary<char, TrieNode> children, 
-            bool isWord, int wordCount)
+        internal TrieNode(char character, IDictionary<char, TrieNode> children,
+            int wordCount, TrieNode parent)
         {
             Character = character;
             Children = children;
-            IsWord = isWord;
             WordCount = wordCount;
+            Parent = parent;
         }
 
         #endregion

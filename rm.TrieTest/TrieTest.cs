@@ -22,7 +22,7 @@ namespace rm.Trie.Test
         {
             trie = null;
         }
-        
+
         #region Tests
 
         [Test]
@@ -90,8 +90,42 @@ namespace rm.Trie.Test
         {
             bool hasWord2Upper = trie.HasWord("ZZ");
             Assert.IsFalse(hasWord2Upper);
-        } 
-        
+        }
+        [Test]
+        public void Test12()
+        {
+            trie.RemoveWord("this");
+            Assert.AreEqual(9, trie.GetWords().Count);
+            trie.RemoveWord("the");
+            Assert.AreEqual(8, trie.GetWords().Count);
+            trie.RemoveWord("te");
+            Assert.AreEqual(8, trie.GetWords().Count);
+            trie.RemoveWord("test");
+            Assert.AreEqual(7, trie.GetWords().Count);
+            trie.RemoveWord("word not present");
+            Assert.AreEqual(7, trie.GetWords().Count);
+            trie.RemoveWord("123");
+            foreach (var word in trie.GetWords())
+            {
+                trie.RemoveWord(word);
+            }
+            Assert.AreEqual(0, trie.GetWords().Count);
+        }
+        [Test]
+        public void Test13()
+        {
+            var trie = TrieFactory.GetTrie();
+            trie.AddWord("");
+            trie.AddWord("");
+            Assert.AreEqual(1, trie.GetWords().Count);
+            trie.RemoveWord("");
+            Assert.AreEqual(0, trie.GetWords().Count);
+            trie.AddWord("");
+            Assert.AreEqual(1, trie.GetWords().Count);
+            trie.RemoveWord("");
+            Assert.AreEqual(0, trie.GetWords().Count);
+        }
+
         #endregion
 
         #region Different types of Tries

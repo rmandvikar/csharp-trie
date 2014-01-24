@@ -16,20 +16,21 @@ namespace rm.Trie
         public static ITrie GetTrie()
         {
             return new Trie(
-                GetTrieNode(' ')
+                GetTrieNode(' ', null)
                 );
         }
         /// <summary>
         /// Get a new TrieNode instance.
         /// </summary>
         /// <param name="character">Character of the TrieNode.</param>
-        internal static TrieNode GetTrieNode(char character)
+        internal static TrieNode GetTrieNode(char character, 
+            TrieNode parent)
         {
             return new TrieNode(character,
                 new Dictionary<char, TrieNode>(),
-                false,
-                0)
-                ;
+                0,
+                parent
+                );
         }
     }
 }

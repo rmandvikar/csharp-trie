@@ -9,6 +9,9 @@ A trie (prefix tree) data structure implementation in C#.
 // Add a word to the Trie.
 void AddWord(string word);
 
+// Remove word from the Trie.
+void RemoveWord(string word);
+
 // Get all words in the Trie.
 ICollection<string> GetWords();
 
@@ -43,6 +46,9 @@ var hasWord = trie.HasWord("test");
 
 // Get word count for a word.
 var wordCount = trie.WordCount("test");
+
+// Remove word.
+trie.RemoveWord("test");
 ```
 
 #### Note: 

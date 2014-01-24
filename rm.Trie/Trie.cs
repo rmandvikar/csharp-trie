@@ -41,6 +41,19 @@ namespace rm.Trie
         }
 
         /// <summary>
+        /// Remove word from the Trie.
+        /// </summary>
+        public void RemoveWord(string word)
+        {
+            var trieNode = GetTrieNode(word);
+            if (trieNode != null && trieNode.IsWord)
+            {
+                trieNode.WordCount = 0;
+                RemoveNode(trieNode);
+            }
+        }
+
+        /// <summary>
         /// Get all words in the Trie.
         /// </summary>
         public ICollection<string> GetWords()
@@ -125,7 +138,6 @@ namespace rm.Trie
         {
             if (word.Length == 0)
             {
-                trieNode.IsWord = true;
                 trieNode.WordCount++;
             }
             else
@@ -135,7 +147,7 @@ namespace rm.Trie
                 trieNode.Children.TryGetValue(c, out child);
                 if (child == null)
                 {
-                    child = TrieFactory.GetTrieNode(c);
+                    child = TrieFactory.GetTrieNode(c, trieNode);
                     trieNode.Children[c] = child;
                 }
                 var cRemoved = Utilities.FirstCharRemoved(word);
@@ -159,6 +171,24 @@ namespace rm.Trie
                 GetWords(child, words, buffer);
                 // Remove recent character
                 buffer.Length--;
+            }
+        }
+
+        /// <summary>
+        /// Recursive method to remove word. Remove only if node does not 
+        /// have children and is not a word node and has a parent node.
+        /// </summary>
+        private void RemoveNode(TrieNode trieNode)
+        {
+            if (trieNode.Children.Count == 0 // should not have any children
+                && !trieNode.IsWord // should not be a word
+                && trieNode != rootTrieNode // do not remove root node
+                )
+            {
+                var parent = trieNode.Parent;
+                trieNode.Parent.Children.Remove(trieNode.Character);
+                trieNode.Parent = null;
+                RemoveNode(parent);
             }
         }
 

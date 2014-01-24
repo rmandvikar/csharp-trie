@@ -13,6 +13,11 @@ namespace rm.Trie
         void AddWord(string word);
 
         /// <summary>
+        /// Remove word from the Trie.
+        /// </summary>
+        void RemoveWord(string word);
+
+        /// <summary>
         /// Get all words in the Trie.
         /// </summary>
         ICollection<string> GetWords();
