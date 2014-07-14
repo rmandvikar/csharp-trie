@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace rm.Trie.Test
@@ -98,11 +99,11 @@ namespace rm.Trie.Test
             Assert.AreEqual(9, trie.GetWords().Count);
             trie.RemoveWord("the");
             Assert.AreEqual(8, trie.GetWords().Count);
-            trie.RemoveWord("te");
+            Assert.Throws<ArgumentOutOfRangeException>(() => trie.RemoveWord("te"));
             Assert.AreEqual(8, trie.GetWords().Count);
             trie.RemoveWord("test");
             Assert.AreEqual(7, trie.GetWords().Count);
-            trie.RemoveWord("word not present");
+            Assert.Throws<ArgumentOutOfRangeException>(() => trie.RemoveWord("word not present"));
             Assert.AreEqual(7, trie.GetWords().Count);
             trie.RemoveWord("123");
             foreach (var word in trie.GetWords())

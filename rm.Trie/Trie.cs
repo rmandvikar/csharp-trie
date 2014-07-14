@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace rm.Trie
@@ -46,11 +47,14 @@ namespace rm.Trie
         public void RemoveWord(string word)
         {
             var trieNode = GetTrieNode(word);
-            if (trieNode != null && trieNode.IsWord)
+            if (trieNode == null || !trieNode.IsWord)
             {
-                trieNode.WordCount = 0;
-                RemoveNode(trieNode);
+                throw new ArgumentOutOfRangeException(
+                    string.Format("{0} does not exist in trie.", word)
+                    );
             }
+            trieNode.WordCount = 0;
+            RemoveNode(trieNode);
         }
 
         /// <summary>
