@@ -115,7 +115,7 @@ namespace rm.Trie.Test
         [Test]
         public void Test13()
         {
-            var trie = TrieFactory.GetTrie();
+            var trie = TrieFactory.CreateTrie();
             trie.AddWord("");
             trie.AddWord("");
             Assert.AreEqual(1, trie.GetWords().Count);
@@ -143,7 +143,7 @@ namespace rm.Trie.Test
 
         private ITrie MixedTrie()
         {
-            ITrie trie = TrieFactory.GetTrie();
+            ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
                 "123", "1", "23", "1",
@@ -159,7 +159,7 @@ namespace rm.Trie.Test
 
         private ITrie AsciiWords()
         {
-            ITrie trie = TrieFactory.GetTrie();
+            ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
                 "123", "1", "23", "1",
@@ -175,7 +175,7 @@ namespace rm.Trie.Test
 
         private ITrie Digits()
         {
-            ITrie trie = TrieFactory.GetTrie();
+            ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
                 "123", "1", "23"
@@ -190,7 +190,7 @@ namespace rm.Trie.Test
 
         private ITrie Words()
         {
-            ITrie trie = TrieFactory.GetTrie();
+            ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
                 "this", "test", "the", "TEMP", "TOKEN", "TAKE", "THUMP"
@@ -205,7 +205,7 @@ namespace rm.Trie.Test
 
         private ITrie UpperCaseWords()
         {
-            ITrie trie = TrieFactory.GetTrie();
+            ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
                 "THIS", "TEST", "THE", "TEMP", "TOKEN", "TAKE", "THUMP"
@@ -220,7 +220,7 @@ namespace rm.Trie.Test
 
         private ITrie LowerCaseWords()
         {
-            ITrie trie = TrieFactory.GetTrie();
+            ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
                 "this", "test", "the", "temp", "token", "take", "thump"

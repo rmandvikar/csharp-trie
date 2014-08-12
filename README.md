@@ -29,7 +29,7 @@ int WordCount(string word);
 
 ```c#
 // Create a new trie.
-ITrie trie = TrieFactory.GetTrie();
+ITrie trie = TrieFactory.CreateTrie();
 
 // Add words.
 trie.AddWord("test");

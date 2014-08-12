@@ -11,19 +11,19 @@ namespace rm.Trie
     public static class TrieFactory
     {
         /// <summary>
-        /// Get a new Trie instance.
+        /// Create a new Trie instance.
         /// </summary>
-        public static ITrie GetTrie()
+        public static ITrie CreateTrie()
         {
             return new Trie(
-                GetTrieNode(' ', null)
+                CreateTrieNode(' ', null)
                 );
         }
         /// <summary>
-        /// Get a new TrieNode instance.
+        /// Create a new TrieNode instance.
         /// </summary>
         /// <param name="character">Character of the TrieNode.</param>
-        internal static TrieNode GetTrieNode(char character, 
+        internal static TrieNode CreateTrieNode(char character, 
             TrieNode parent)
         {
             return new TrieNode(character,

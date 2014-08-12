@@ -151,7 +151,7 @@ namespace rm.Trie
                 trieNode.Children.TryGetValue(c, out child);
                 if (child == null)
                 {
-                    child = TrieFactory.GetTrieNode(c, trieNode);
+                    child = TrieFactory.CreateTrieNode(c, trieNode);
                     trieNode.Children[c] = child;
                 }
                 var cRemoved = Utilities.FirstCharRemoved(word);
