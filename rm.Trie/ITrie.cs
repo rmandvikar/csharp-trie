@@ -36,5 +36,15 @@ namespace rm.Trie
         /// Returns the count for the word in the Trie.
         /// </summary>
         int WordCount(string word);
+
+        /// <summary>
+        /// Get longest words from the Trie.
+        /// </summary>
+        ICollection<string> GetLongestWords();
+
+        /// <summary>
+        /// Clear all words from the Trie.
+        /// </summary>
+        void Clear();
     }
 }

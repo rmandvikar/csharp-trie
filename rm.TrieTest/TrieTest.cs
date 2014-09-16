@@ -126,6 +126,31 @@ namespace rm.Trie.Test
             trie.RemoveWord("");
             Assert.AreEqual(0, trie.GetWords().Count);
         }
+        [Test]
+        public void Test14()
+        {
+            trie.AddWord("the longest word");
+            var expected = new[] { "the longest word" };
+            var longestWords = trie.GetLongestWords();
+            Assert.AreEqual(expected, longestWords);
+        }
+        [Test]
+        public void Test15()
+        {
+            trie.AddWord("the longest word 1");
+            trie.AddWord("the longest word 2");
+            var expected = new[] { "the longest word 1", "the longest word 2" };
+            var longestWords = trie.GetLongestWords();
+            Assert.AreEqual(expected, longestWords);
+        }
+        [Test]
+        public void Test16()
+        {
+            trie.AddWord("");
+            Assert.AreNotEqual(0, trie.GetWords().Count);
+            trie.Clear();
+            Assert.AreEqual(0, trie.GetWords().Count);
+        }
 
         #endregion
 

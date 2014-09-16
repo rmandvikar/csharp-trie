@@ -111,6 +111,27 @@ namespace rm.Trie
             return (trieNode == null ? 0 : trieNode.WordCount);
         }
 
+        /// <summary>
+        /// Get longest words from the Trie.
+        /// </summary>
+        public ICollection<string> GetLongestWords()
+        {
+            var longestWords = new List<string>();
+            var buffer = new StringBuilder();
+            var length = 0;
+            GetLongestWords(rootTrieNode, longestWords, buffer, ref length);
+            return longestWords;
+        }
+
+        /// <summary>
+        /// Clear all words from the Trie.
+        /// </summary>
+        public void Clear()
+        {
+            rootTrieNode.WordCount = 0;
+            rootTrieNode.Children.Clear();
+        }
+
         #endregion
 
         #region Private methods
@@ -193,6 +214,33 @@ namespace rm.Trie
                 trieNode.Parent.Children.Remove(trieNode.Character);
                 trieNode.Parent = null;
                 RemoveNode(parent);
+            }
+        }
+
+        /// <summary>
+        /// Recursive method to get longest words starting from given TrieNode.
+        /// </summary>
+        private void GetLongestWords(TrieNode trieNode,
+            ICollection<string> longestWords, StringBuilder buffer, ref int length)
+        {
+            if (trieNode.IsWord)
+            {
+                if (buffer.Length > length)
+                {
+                    longestWords.Clear();
+                    length = buffer.Length;
+                }
+                if (buffer.Length >= length)
+                {
+                    longestWords.Add(buffer.ToString());
+                }
+            }
+            foreach (var child in trieNode.Children.Values)
+            {
+                buffer.Append(child.Character);
+                GetLongestWords(child, longestWords, buffer, ref length);
+                // Remove recent character
+                buffer.Length--;
             }
         }
 

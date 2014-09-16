@@ -23,6 +23,12 @@ bool HasWord(string word);
 
 // Returns the count for the word in the Trie.
 int WordCount(string word);
+
+// Get longest words from the Trie.
+ICollection<string> GetLongestWords();
+
+// Clear all words from the Trie.
+void Clear();
 ```
 
 ### Example
@@ -49,6 +55,12 @@ var wordCount = trie.WordCount("test");
 
 // Remove word.
 trie.RemoveWord("test");
+
+// Get longest words.
+var longestWords = trie.GetLongestWords();
+
+// Clear all words.
+trie.Clear();
 ```
 
 #### Note: 
