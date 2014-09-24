@@ -53,8 +53,7 @@ namespace rm.Trie
                     string.Format("{0} does not exist in trie.", word)
                     );
             }
-            trieNode.WordCount = 0;
-            RemoveNode(trieNode);
+            trieNode.RemoveNode(rootTrieNode);
         }
 
         /// <summary>
@@ -128,8 +127,7 @@ namespace rm.Trie
         /// </summary>
         public void Clear()
         {
-            rootTrieNode.WordCount = 0;
-            rootTrieNode.Children.Clear();
+            rootTrieNode.Clear();
         }
 
         #endregion
@@ -143,9 +141,9 @@ namespace rm.Trie
         private TrieNode GetTrieNode(string prefix)
         {
             var trieNode = rootTrieNode;
-            foreach (var prefixChar in prefix.ToCharArray())
+            foreach (var prefixChar in prefix)
             {
-                trieNode.Children.TryGetValue(prefixChar, out trieNode);
+                trieNode = trieNode.GetChild(prefixChar);
                 if (trieNode == null)
                 {
                     break;
@@ -164,20 +162,17 @@ namespace rm.Trie
             if (word.Length == 0)
             {
                 trieNode.WordCount++;
+                return;
             }
-            else
+            var c = Utilities.FirstChar(word);
+            TrieNode child = trieNode.GetChild(c);
+            if (child == null)
             {
-                var c = Utilities.FirstChar(word);
-                TrieNode child;
-                trieNode.Children.TryGetValue(c, out child);
-                if (child == null)
-                {
-                    child = TrieFactory.CreateTrieNode(c, trieNode);
-                    trieNode.Children[c] = child;
-                }
-                var cRemoved = Utilities.FirstCharRemoved(word);
-                AddWord(child, cRemoved);
+                child = TrieFactory.CreateTrieNode(c, trieNode);
+                trieNode.SetChild(child);
             }
+            var cRemoved = Utilities.FirstCharRemoved(word);
+            AddWord(child, cRemoved);
         }
 
         /// <summary>
@@ -190,30 +185,12 @@ namespace rm.Trie
             {
                 words.Add(buffer.ToString());
             }
-            foreach (var child in trieNode.Children.Values)
+            foreach (var child in trieNode.GetChildren())
             {
                 buffer.Append(child.Character);
                 GetWords(child, words, buffer);
                 // Remove recent character
                 buffer.Length--;
-            }
-        }
-
-        /// <summary>
-        /// Recursive method to remove word. Remove only if node does not 
-        /// have children and is not a word node and has a parent node.
-        /// </summary>
-        private void RemoveNode(TrieNode trieNode)
-        {
-            if (trieNode.Children.Count == 0 // should not have any children
-                && !trieNode.IsWord // should not be a word
-                && trieNode != rootTrieNode // do not remove root node
-                )
-            {
-                var parent = trieNode.Parent;
-                trieNode.Parent.Children.Remove(trieNode.Character);
-                trieNode.Parent = null;
-                RemoveNode(parent);
             }
         }
 
@@ -235,7 +212,7 @@ namespace rm.Trie
                     longestWords.Add(buffer.ToString());
                 }
             }
-            foreach (var child in trieNode.Children.Values)
+            foreach (var child in trieNode.GetChildren())
             {
                 buffer.Append(child.Character);
                 GetLongestWords(child, longestWords, buffer, ref length);
