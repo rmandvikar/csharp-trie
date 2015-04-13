@@ -47,8 +47,8 @@ namespace rm.Trie
         /// </summary>
         /// <param name="character">The character for the TrieNode.</param>
         /// <param name="children">Children of TrieNode.</param>
-        /// <param name="isWord">If root TrieNode to this TrieNode is a word.</param>
         /// <param name="wordCount"></param>
+        /// <param name="parent"></param>
         internal TrieNode(char character, IDictionary<char, TrieNode> children,
             int wordCount, TrieNode parent)
         {
