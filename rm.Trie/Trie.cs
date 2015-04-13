@@ -72,22 +72,14 @@ namespace rm.Trie
         /// </summary>
         public ICollection<string> GetWords(string prefix)
         {
-            ICollection<string> words;
-            if (string.IsNullOrEmpty(prefix))
+            // Empty list if no prefix match
+            var words = new List<string>();
+            var trieNode = GetTrieNode(prefix);
+            if (trieNode != null)
             {
-                words = GetWords();
-            }
-            else
-            {
-                var trieNode = GetTrieNode(prefix);
-                // Empty list if no prefix match
-                words = new List<string>();
-                if (trieNode != null)
-                {
-                    var buffer = new StringBuilder();
-                    buffer.Append(prefix);
-                    GetWords(trieNode, words, buffer);
-                }
+                var buffer = new StringBuilder();
+                buffer.Append(prefix);
+                GetWords(trieNode, words, buffer);
             }
             return words;
         }
@@ -159,20 +151,17 @@ namespace rm.Trie
         /// </summary>
         private void AddWord(TrieNode trieNode, char[] word)
         {
-            if (word.Length == 0)
+            foreach (var c in word)
             {
-                trieNode.WordCount++;
-                return;
+                var child = trieNode.GetChild(c);
+                if (child == null)
+                {
+                    child = TrieFactory.CreateTrieNode(c, trieNode);
+                    trieNode.SetChild(child);
+                }
+                trieNode = child;
             }
-            var c = Utilities.FirstChar(word);
-            TrieNode child = trieNode.GetChild(c);
-            if (child == null)
-            {
-                child = TrieFactory.CreateTrieNode(c, trieNode);
-                trieNode.SetChild(child);
-            }
-            var cRemoved = Utilities.FirstCharRemoved(word);
-            AddWord(child, cRemoved);
+            trieNode.WordCount++;
         }
 
         /// <summary>
