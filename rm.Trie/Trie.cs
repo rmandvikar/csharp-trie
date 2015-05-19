@@ -196,7 +196,7 @@ namespace rm.Trie
                     longestWords.Clear();
                     length = buffer.Length;
                 }
-                if (buffer.Length >= length)
+                if (buffer.Length == length)
                 {
                     longestWords.Add(buffer.ToString());
                 }
