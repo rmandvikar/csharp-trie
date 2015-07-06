@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace rm.Trie
@@ -46,14 +47,7 @@ namespace rm.Trie
         /// </summary>
         public void RemoveWord(string word)
         {
-            var trieNode = GetTrieNode(word);
-            if (trieNode == null || !trieNode.IsWord)
-            {
-                throw new ArgumentOutOfRangeException(
-                    string.Format("{0} does not exist in trie.", word)
-                    );
-            }
-            trieNode.RemoveNode(rootTrieNode);
+            RemoveWord(GetTrieNodesStack(word));
         }
 
         /// <summary>
@@ -156,7 +150,7 @@ namespace rm.Trie
                 var child = trieNode.GetChild(c);
                 if (child == null)
                 {
-                    child = TrieFactory.CreateTrieNode(c, trieNode);
+                    child = TrieFactory.CreateTrieNode(c);
                     trieNode.SetChild(child);
                 }
                 trieNode = child;
@@ -207,6 +201,51 @@ namespace rm.Trie
                 GetLongestWords(child, longestWords, buffer, ref length);
                 // Remove recent character
                 buffer.Length--;
+            }
+        }
+
+        /// <summary>
+        /// Get stack of trieNodes for given word.
+        /// </summary>
+        private Stack<TrieNode> GetTrieNodesStack(string word)
+        {
+            var nodes = new Stack<TrieNode>(word.Length + 1);
+            var trieNode = rootTrieNode;
+            nodes.Push(trieNode);
+            foreach (var c in word)
+            {
+                trieNode = trieNode.GetChild(c);
+                if (trieNode == null)
+                {
+                    break;
+                }
+                nodes.Push(trieNode);
+            }
+            if (trieNode == null || !trieNode.IsWord)
+            {
+                throw new ArgumentOutOfRangeException(
+                    string.Format("{0} does not exist in trie.", word)
+                    );
+            }
+            return nodes;
+        }
+
+        /// <summary>
+        /// Remove unneeded nodes except root from stack of trieNodes.
+        /// </summary>
+        private void RemoveWord(Stack<TrieNode> trieNodes)
+        {
+            // Mark the last trieNode as not a word
+            trieNodes.Peek().WordCount = 0;
+            while (trieNodes.Count > 1)
+            {
+                var trieNode = trieNodes.Pop();
+                var parentTrieNode = trieNodes.Peek();
+                if (trieNode.IsWord || trieNode.GetChildren().Any())
+                {
+                    break;
+                }
+                parentTrieNode.RemoveChild(trieNode.Character);
             }
         }
 

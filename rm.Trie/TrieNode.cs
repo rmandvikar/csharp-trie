@@ -32,12 +32,6 @@ namespace rm.Trie
         /// </summary>
         internal int WordCount { get; set; }
 
-        /// <summary>
-        /// Parent TrieNode of this TrieNode.
-        /// </summary>
-        /// <remarks>Required to easily remove word from Trie.</remarks>
-        internal TrieNode Parent { get; private set; }
-
         #endregion
 
         #region constructors
@@ -48,14 +42,12 @@ namespace rm.Trie
         /// <param name="character">The character for the TrieNode.</param>
         /// <param name="children">Children of TrieNode.</param>
         /// <param name="wordCount"></param>
-        /// <param name="parent"></param>
         internal TrieNode(char character, IDictionary<char, TrieNode> children,
-            int wordCount, TrieNode parent)
+            int wordCount)
         {
             Character = character;
             Children = children;
             WordCount = wordCount;
-            Parent = parent;
         }
 
         #endregion
@@ -102,34 +94,9 @@ namespace rm.Trie
             Children[child.Character] = child;
         }
 
-        private void RemoveChild(char character)
+        internal void RemoveChild(char character)
         {
             Children.Remove(character);
-        }
-
-        internal void RemoveNode(TrieNode rootTrieNode)
-        {
-            // set this node's word count to 0
-            WordCount = 0;
-            RemoveNode_Recursive(rootTrieNode);
-        }
-
-        /// <summary>
-        /// Recursive method to remove word. Remove only if node does not 
-        /// have children and is not a word node and has a parent node.
-        /// </summary>
-        private void RemoveNode_Recursive(TrieNode rootTrieNode)
-        {
-            if (Children.Count == 0 // should not have any children
-                && !IsWord // should not be a word
-                && this != rootTrieNode // do not remove root node
-                )
-            {
-                var parent = Parent;
-                Parent.RemoveChild(Character);
-                Parent = null;
-                parent.RemoveNode_Recursive(rootTrieNode);
-            }
         }
 
         internal void Clear()
