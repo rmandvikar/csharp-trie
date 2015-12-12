@@ -27,73 +27,73 @@ namespace rm.Trie.Test
         #region Tests
 
         [Test]
-        public void Test01()
+        public void GetWords01()
         {
             var words = trie.GetWords();
             Assert.AreEqual(10, words.Count);
         }
         [Test]
-        public void Test02()
+        public void GetWords_Prefix01()
         {
             var prefixWordsEmpty = trie.GetWords("");
             Assert.AreEqual(10, prefixWordsEmpty.Count);
         }
         [Test]
-        public void Test03()
+        public void GetWords_Prefix02()
         {
             var prefixWords1 = trie.GetWords("th");
             Assert.AreEqual(2, prefixWords1.Count);
         }
         [Test]
-        public void Test04()
+        public void GetWords_Prefix03()
         {
             var prefixWords1Upper = trie.GetWords("TH");
             Assert.AreEqual(1, prefixWords1Upper.Count);
         }
         [Test]
-        public void Test05()
+        public void GetWords_Prefix04()
         {
             var prefixWords2 = trie.GetWords("z");
             Assert.AreEqual(0, prefixWords2.Count);
         }
         [Test]
-        public void Test06()
+        public void GetWords_Prefix05()
         {
             var prefixWords2Upper = trie.GetWords("Z");
             Assert.AreEqual(0, prefixWords2Upper.Count);
         }
         [Test]
-        public void Test07()
+        public void GetWords_Prefix06()
         {
             var prefixWords3Digits = trie.GetWords("1");
             Assert.AreEqual(2, prefixWords3Digits.Count);
         }
         [Test]
-        public void Test08()
+        public void HasWord01()
         {
             bool hasWord1 = trie.HasWord("test");
             Assert.IsTrue(hasWord1);
         }
         [Test]
-        public void Test09()
+        public void HasWord02()
         {
             bool hasWord1Upper = trie.HasWord("TEST");
             Assert.IsFalse(hasWord1Upper);
         }
         [Test]
-        public void Test10()
+        public void HasWord03()
         {
             bool hasWord2 = trie.HasWord("zz");
             Assert.IsFalse(hasWord2);
         }
         [Test]
-        public void Test11()
+        public void HasWord04()
         {
             bool hasWord2Upper = trie.HasWord("ZZ");
             Assert.IsFalse(hasWord2Upper);
         }
         [Test]
-        public void Test12()
+        public void RemoveWord01()
         {
             trie.RemoveWord("this");
             Assert.AreEqual(9, trie.GetWords().Count);
@@ -113,7 +113,15 @@ namespace rm.Trie.Test
             Assert.AreEqual(0, trie.GetWords().Count);
         }
         [Test]
-        public void Test13()
+        public void AddWord_EmptyString01()
+        {
+            trie = TrieFactory.CreateTrie();
+            Assert.AreEqual(0, trie.GetWords().Count);
+            trie.AddWord("");
+            Assert.AreNotEqual(0, trie.GetWords().Count);
+        }
+        [Test]
+        public void AddWord_RemoveWord01()
         {
             var trie = TrieFactory.CreateTrie();
             trie.AddWord("");
@@ -127,7 +135,7 @@ namespace rm.Trie.Test
             Assert.AreEqual(0, trie.GetWords().Count);
         }
         [Test]
-        public void Test14()
+        public void GetLongestWords01()
         {
             trie.AddWord("the longest word");
             var expected = new[] { "the longest word" };
@@ -135,7 +143,7 @@ namespace rm.Trie.Test
             Assert.AreEqual(expected, longestWords);
         }
         [Test]
-        public void Test15()
+        public void GetLongestWords02()
         {
             trie.AddWord("the longest word 1");
             trie.AddWord("the longest word 2");
@@ -144,9 +152,8 @@ namespace rm.Trie.Test
             Assert.AreEqual(expected, longestWords);
         }
         [Test]
-        public void Test16()
+        public void Clear01()
         {
-            trie.AddWord("");
             Assert.AreNotEqual(0, trie.GetWords().Count);
             trie.Clear();
             Assert.AreEqual(0, trie.GetWords().Count);
@@ -154,20 +161,8 @@ namespace rm.Trie.Test
 
         #endregion
 
-        #region Different types of Tries
-
         private ITrie BuildSampleTrie()
         {
-            return MixedTrie();
-            return AsciiWords();
-            return Digits();
-            return Words();
-            return UpperCaseWords();
-            return LowerCaseWords();
-        }
-
-        private ITrie MixedTrie()
-        {
             ITrie trie = TrieFactory.CreateTrie();
             string[] strings = 
             { 
@@ -181,83 +176,5 @@ namespace rm.Trie.Test
             }
             return trie;
         }
-
-        private ITrie AsciiWords()
-        {
-            ITrie trie = TrieFactory.CreateTrie();
-            string[] strings = 
-            { 
-                "123", "1", "23", "1",
-                "this", "test", "the", "TEMP", "TOKEN", "TAKE", "THUMP"
-            };
-
-            foreach (string s in strings)
-            {
-                trie.AddWord(s);
-            }
-            return trie;
-        }
-
-        private ITrie Digits()
-        {
-            ITrie trie = TrieFactory.CreateTrie();
-            string[] strings = 
-            { 
-                "123", "1", "23"
-            };
-
-            foreach (string s in strings)
-            {
-                trie.AddWord(s);
-            }
-            return trie;
-        }
-
-        private ITrie Words()
-        {
-            ITrie trie = TrieFactory.CreateTrie();
-            string[] strings = 
-            { 
-                "this", "test", "the", "TEMP", "TOKEN", "TAKE", "THUMP"
-            };
-
-            foreach (string s in strings)
-            {
-                trie.AddWord(s);
-            }
-            return trie;
-        }
-
-        private ITrie UpperCaseWords()
-        {
-            ITrie trie = TrieFactory.CreateTrie();
-            string[] strings = 
-            { 
-                "THIS", "TEST", "THE", "TEMP", "TOKEN", "TAKE", "THUMP"
-            };
-
-            foreach (string s in strings)
-            {
-                trie.AddWord(s);
-            }
-            return trie;
-        }
-
-        private ITrie LowerCaseWords()
-        {
-            ITrie trie = TrieFactory.CreateTrie();
-            string[] strings = 
-            { 
-                "this", "test", "the", "temp", "token", "take", "thump"
-            };
-
-            foreach (string s in strings)
-            {
-                trie.AddWord(s);
-            }
-            return trie;
-        }
-
-        #endregion
     }
 }
