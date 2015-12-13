@@ -113,6 +113,18 @@ namespace rm.Trie.Test
             Assert.AreEqual(0, trie.GetWords().Count);
         }
         [Test]
+        public void RemovePrefix01()
+        {
+            trie.RemovePrefix("1");
+            Assert.AreEqual(8, trie.GetWords().Count);
+            trie.RemovePrefix("th");
+            Assert.AreEqual(6, trie.GetWords().Count);
+            trie.RemovePrefix("x");
+            Assert.AreEqual(6, trie.GetWords().Count);
+            trie.RemovePrefix("");
+            Assert.AreEqual(0, trie.GetWords().Count);
+        }
+        [Test]
         public void AddWord_EmptyString01()
         {
             trie = TrieFactory.CreateTrie();

@@ -18,6 +18,11 @@ namespace rm.Trie
         void RemoveWord(string word);
 
         /// <summary>
+        /// Remove words by prefix from the Trie.
+        /// </summary>
+        void RemovePrefix(string prefix);
+
+        /// <summary>
         /// Get all words in the Trie.
         /// </summary>
         ICollection<string> GetWords();

@@ -51,6 +51,19 @@ namespace rm.Trie
         }
 
         /// <summary>
+        /// Remove words by prefix from the Trie.
+        /// </summary>
+        public void RemovePrefix(string prefix)
+        {
+            var trieNodes = GetTrieNodesStack(prefix, false);
+            // Clear last trieNode, no need to remove unneeded nodes
+            if (trieNodes.Any())
+            {
+                trieNodes.Pop().Clear();
+            }
+        }
+
+        /// <summary>
         /// Get all words in the Trie.
         /// </summary>
         public ICollection<string> GetWords()
@@ -205,27 +218,31 @@ namespace rm.Trie
         }
 
         /// <summary>
-        /// Get stack of trieNodes for given word.
+        /// Get stack of trieNodes for given string.
         /// </summary>
-        private Stack<TrieNode> GetTrieNodesStack(string word)
+        private Stack<TrieNode> GetTrieNodesStack(string s, bool isWord = true)
         {
-            var nodes = new Stack<TrieNode>(word.Length + 1);
+            var nodes = new Stack<TrieNode>(s.Length + 1);
             var trieNode = rootTrieNode;
             nodes.Push(trieNode);
-            foreach (var c in word)
+            foreach (var c in s)
             {
                 trieNode = trieNode.GetChild(c);
                 if (trieNode == null)
                 {
+                    nodes.Clear();
                     break;
                 }
                 nodes.Push(trieNode);
             }
-            if (trieNode == null || !trieNode.IsWord)
+            if (isWord)
             {
-                throw new ArgumentOutOfRangeException(
-                    string.Format("{0} does not exist in trie.", word)
-                    );
+                if (trieNode == null || !trieNode.IsWord)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        string.Format("{0} does not exist in trie.", s)
+                        );
+                }
             }
             return nodes;
         }

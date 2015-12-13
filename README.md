@@ -12,6 +12,9 @@ void AddWord(string word);
 // Remove word from the Trie.
 void RemoveWord(string word);
 
+// Remove words by prefix from the Trie.
+void RemovePrefix(string prefix);
+
 // Get all words in the Trie.
 ICollection<string> GetWords();
 
@@ -55,6 +58,9 @@ var wordCount = trie.WordCount("test");
 
 // Remove word.
 trie.RemoveWord("test");
+
+// Remove words by prefix.
+trie.RemovePrefix("thi");
 
 // Get longest words.
 var longestWords = trie.GetLongestWords();
