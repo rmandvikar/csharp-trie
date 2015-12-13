@@ -170,6 +170,16 @@ namespace rm.Trie.Test
             trie.Clear();
             Assert.AreEqual(0, trie.GetWords().Count);
         }
+        [Test]
+        public void Count01()
+        {
+            Assert.AreEqual(11, trie.Count());
+        }
+        [Test]
+        public void UniqueCount01()
+        {
+            Assert.AreEqual(10, trie.UniqueCount());
+        }
 
         #endregion
 

@@ -129,6 +129,26 @@ namespace rm.Trie
             rootTrieNode.Clear();
         }
 
+        /// <summary>
+        /// Get total word count in the Trie.
+        /// </summary>
+        public int Count()
+        {
+            int count = 0;
+            GetCount(rootTrieNode, ref count, false);
+            return count;
+        }
+
+        /// <summary>
+        /// Get unique word count in the Trie.
+        /// </summary>
+        public int UniqueCount()
+        {
+            int count = 0;
+            GetCount(rootTrieNode, ref count, true);
+            return count;
+        }
+
         #endregion
 
         #region Private methods
@@ -263,6 +283,21 @@ namespace rm.Trie
                     break;
                 }
                 parentTrieNode.RemoveChild(trieNode.Character);
+            }
+        }
+
+        /// <summary>
+        /// Get word count in the Trie.
+        /// </summary>
+        private void GetCount(TrieNode trieNode, ref int count, bool isUnique)
+        {
+            if (trieNode.IsWord)
+            {
+                count += isUnique ? 1 : trieNode.WordCount;
+            }
+            foreach (var child in trieNode.GetChildren())
+            {
+                GetCount(child, ref count, isUnique);
             }
         }
 

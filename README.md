@@ -32,6 +32,12 @@ ICollection<string> GetLongestWords();
 
 // Clear all words from the Trie.
 void Clear();
+
+// Get total word count in the Trie.
+int Count();
+
+// Get unique word count in the Trie.
+int UniqueCount();
 ```
 
 ### Example
@@ -67,6 +73,11 @@ var longestWords = trie.GetLongestWords();
 
 // Clear all words.
 trie.Clear();
+
+// Get counts.
+trie.AddWord("test"); // adding "test" again
+var count = trie.Count();
+var uniqueCount = trie.UniqueCount();
 ```
 
 #### Note: 

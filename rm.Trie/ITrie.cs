@@ -51,5 +51,15 @@ namespace rm.Trie
         /// Clear all words from the Trie.
         /// </summary>
         void Clear();
+
+        /// <summary>
+        /// Get total word count in the Trie.
+        /// </summary>
+        int Count();
+
+        /// <summary>
+        /// Get unique word count in the Trie.
+        /// </summary>
+        int UniqueCount();
     }
 }
