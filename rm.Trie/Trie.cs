@@ -122,6 +122,18 @@ namespace rm.Trie
         }
 
         /// <summary>
+        /// Get shortest words from the Trie.
+        /// </summary>
+        public ICollection<string> GetShortestWords()
+        {
+            var shortestWords = new List<string>();
+            var buffer = new StringBuilder();
+            var length = int.MaxValue;
+            GetShortestWords(rootTrieNode, shortestWords, buffer, ref length);
+            return shortestWords;
+        }
+
+        /// <summary>
         /// Clear all words from the Trie.
         /// </summary>
         public void Clear()
@@ -232,6 +244,33 @@ namespace rm.Trie
             {
                 buffer.Append(child.Character);
                 GetLongestWords(child, longestWords, buffer, ref length);
+                // Remove recent character
+                buffer.Length--;
+            }
+        }
+
+        /// <summary>
+        /// Recursive method to get shortest words starting from given TrieNode.
+        /// </summary>
+        private void GetShortestWords(TrieNode trieNode,
+            ICollection<string> shortestWords, StringBuilder buffer, ref int length)
+        {
+            if (trieNode.IsWord)
+            {
+                if (buffer.Length < length)
+                {
+                    shortestWords.Clear();
+                    length = buffer.Length;
+                }
+                if (buffer.Length == length)
+                {
+                    shortestWords.Add(buffer.ToString());
+                }
+            }
+            foreach (var child in trieNode.GetChildren())
+            {
+                buffer.Append(child.Character);
+                GetShortestWords(child, shortestWords, buffer, ref length);
                 // Remove recent character
                 buffer.Length--;
             }

@@ -164,6 +164,22 @@ namespace rm.Trie.Test
             Assert.AreEqual(expected, longestWords);
         }
         [Test]
+        public void GetShortestWords01()
+        {
+            trie.AddWord("a");
+            var expected = new[] { "1", "a" };
+            var shortestWords = trie.GetShortestWords();
+            Assert.AreEqual(expected, shortestWords);
+        }
+        [Test]
+        public void GetShortestWords02()
+        {
+            trie.AddWord("");
+            var expected = new[] { "" };
+            var shortestWords = trie.GetShortestWords();
+            Assert.AreEqual(expected, shortestWords);
+        }
+        [Test]
         public void Clear01()
         {
             Assert.AreNotEqual(0, trie.GetWords().Count);

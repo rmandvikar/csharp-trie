@@ -30,6 +30,9 @@ int WordCount(string word);
 // Get longest words from the Trie.
 ICollection<string> GetLongestWords();
 
+// Get shortest words from the Trie.
+ICollection<string> GetShortestWords();
+
 // Clear all words from the Trie.
 void Clear();
 
@@ -70,6 +73,9 @@ trie.RemovePrefix("thi");
 
 // Get longest words.
 var longestWords = trie.GetLongestWords();
+
+// Get shortest words.
+var shortestWords = trie.GetShortestWords();
 
 // Clear all words.
 trie.Clear();

@@ -48,6 +48,11 @@ namespace rm.Trie
         ICollection<string> GetLongestWords();
 
         /// <summary>
+        /// Get shortest words from the Trie.
+        /// </summary>
+        ICollection<string> GetShortestWords();
+
+        /// <summary>
         /// Clear all words from the Trie.
         /// </summary>
         void Clear();
