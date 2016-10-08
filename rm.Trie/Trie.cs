@@ -116,8 +116,8 @@ namespace rm.Trie
         {
             var longestWords = new List<string>();
             var buffer = new StringBuilder();
-            var length = 0;
-            GetLongestWords(rootTrieNode, longestWords, buffer, ref length);
+            var length = new Wrapped<int>(0);
+            GetLongestWords(rootTrieNode, longestWords, buffer, length);
             return longestWords;
         }
 
@@ -128,8 +128,8 @@ namespace rm.Trie
         {
             var shortestWords = new List<string>();
             var buffer = new StringBuilder();
-            var length = int.MaxValue;
-            GetShortestWords(rootTrieNode, shortestWords, buffer, ref length);
+            var length = new Wrapped<int>(int.MaxValue);
+            GetShortestWords(rootTrieNode, shortestWords, buffer, length);
             return shortestWords;
         }
 
@@ -146,9 +146,9 @@ namespace rm.Trie
         /// </summary>
         public int Count()
         {
-            int count = 0;
-            GetCount(rootTrieNode, ref count, false);
-            return count;
+            var count = new Wrapped<int>(0);
+            GetCount(rootTrieNode, count, false);
+            return count.Value;
         }
 
         /// <summary>
@@ -156,9 +156,9 @@ namespace rm.Trie
         /// </summary>
         public int UniqueCount()
         {
-            int count = 0;
-            GetCount(rootTrieNode, ref count, true);
-            return count;
+            var count = new Wrapped<int>(0);
+            GetCount(rootTrieNode, count, true);
+            return count.Value;
         }
 
         #endregion
@@ -226,16 +226,16 @@ namespace rm.Trie
         /// Recursive method to get longest words starting from given TrieNode.
         /// </summary>
         private void GetLongestWords(TrieNode trieNode,
-            ICollection<string> longestWords, StringBuilder buffer, ref int length)
+            ICollection<string> longestWords, StringBuilder buffer, Wrapped<int> length)
         {
             if (trieNode.IsWord)
             {
-                if (buffer.Length > length)
+                if (buffer.Length > length.Value)
                 {
                     longestWords.Clear();
-                    length = buffer.Length;
+                    length.Value = buffer.Length;
                 }
-                if (buffer.Length == length)
+                if (buffer.Length == length.Value)
                 {
                     longestWords.Add(buffer.ToString());
                 }
@@ -243,7 +243,7 @@ namespace rm.Trie
             foreach (var child in trieNode.GetChildren())
             {
                 buffer.Append(child.Character);
-                GetLongestWords(child, longestWords, buffer, ref length);
+                GetLongestWords(child, longestWords, buffer, length);
                 // Remove recent character
                 buffer.Length--;
             }
@@ -253,16 +253,16 @@ namespace rm.Trie
         /// Recursive method to get shortest words starting from given TrieNode.
         /// </summary>
         private void GetShortestWords(TrieNode trieNode,
-            ICollection<string> shortestWords, StringBuilder buffer, ref int length)
+            ICollection<string> shortestWords, StringBuilder buffer, Wrapped<int> length)
         {
             if (trieNode.IsWord)
             {
-                if (buffer.Length < length)
+                if (buffer.Length < length.Value)
                 {
                     shortestWords.Clear();
-                    length = buffer.Length;
+                    length.Value = buffer.Length;
                 }
-                if (buffer.Length == length)
+                if (buffer.Length == length.Value)
                 {
                     shortestWords.Add(buffer.ToString());
                 }
@@ -270,7 +270,7 @@ namespace rm.Trie
             foreach (var child in trieNode.GetChildren())
             {
                 buffer.Append(child.Character);
-                GetShortestWords(child, shortestWords, buffer, ref length);
+                GetShortestWords(child, shortestWords, buffer, length);
                 // Remove recent character
                 buffer.Length--;
             }
@@ -328,15 +328,15 @@ namespace rm.Trie
         /// <summary>
         /// Get word count in the Trie.
         /// </summary>
-        private void GetCount(TrieNode trieNode, ref int count, bool isUnique)
+        private void GetCount(TrieNode trieNode, Wrapped<int> count, bool isUnique)
         {
             if (trieNode.IsWord)
             {
-                count += isUnique ? 1 : trieNode.WordCount;
+                count.Value += isUnique ? 1 : trieNode.WordCount;
             }
             foreach (var child in trieNode.GetChildren())
             {
-                GetCount(child, ref count, isUnique);
+                GetCount(child, count, isUnique);
             }
         }
 
