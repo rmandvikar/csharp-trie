@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace rm.Trie
 {
@@ -88,6 +89,10 @@ namespace rm.Trie
 
 		internal void SetChild(TrieNode child)
 		{
+			if (child == null)
+			{
+				throw new ArgumentNullException(nameof(child));
+			}
 			Children[child.Character] = child;
 		}
 

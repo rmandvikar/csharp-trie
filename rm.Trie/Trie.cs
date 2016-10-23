@@ -38,6 +38,10 @@ namespace rm.Trie
 		/// </summary>
 		public void AddWord(string word)
 		{
+			if (word == null)
+			{
+				throw new ArgumentNullException(nameof(word));
+			}
 			AddWord(rootTrieNode, word.ToCharArray());
 		}
 
@@ -46,6 +50,10 @@ namespace rm.Trie
 		/// </summary>
 		public void RemoveWord(string word)
 		{
+			if (word == null)
+			{
+				throw new ArgumentNullException(nameof(word));
+			}
 			RemoveWord(GetTrieNodesStack(word));
 		}
 
@@ -54,6 +62,10 @@ namespace rm.Trie
 		/// </summary>
 		public void RemovePrefix(string prefix)
 		{
+			if (prefix == null)
+			{
+				throw new ArgumentNullException(nameof(prefix));
+			}
 			var trieNodes = GetTrieNodesStack(prefix, false);
 			// Clear last trieNode, no need to remove unneeded nodes
 			if (trieNodes.Any())
@@ -78,6 +90,10 @@ namespace rm.Trie
 		/// </summary>
 		public ICollection<string> GetWords(string prefix)
 		{
+			if (prefix == null)
+			{
+				throw new ArgumentNullException(nameof(prefix));
+			}
 			// Empty list if no prefix match
 			var words = new List<string>();
 			var trieNode = GetTrieNode(prefix);
@@ -95,8 +111,12 @@ namespace rm.Trie
 		/// </summary>
 		public bool HasWord(string word)
 		{
+			if (word == null)
+			{
+				throw new ArgumentNullException(nameof(word));
+			}
 			var trieNode = GetTrieNode(word);
-			return trieNode != null && trieNode.IsWord;
+			return trieNode?.IsWord ?? false;
 		}
 
 		/// <summary>
@@ -104,8 +124,12 @@ namespace rm.Trie
 		/// </summary>
 		public int WordCount(string word)
 		{
+			if (word == null)
+			{
+				throw new ArgumentNullException(nameof(word));
+			}
 			var trieNode = GetTrieNode(word);
-			return (trieNode == null ? 0 : trieNode.WordCount);
+			return trieNode?.WordCount ?? 0;
 		}
 
 		/// <summary>
@@ -295,11 +319,9 @@ namespace rm.Trie
 			}
 			if (isWord)
 			{
-				if (trieNode == null || !trieNode.IsWord)
+				if (!trieNode?.IsWord ?? true)
 				{
-					throw new ArgumentOutOfRangeException(
-						string.Format("{0} does not exist in trie.", s)
-						);
+					throw new ArgumentOutOfRangeException($"{s} does not exist in trie.");
 				}
 			}
 			return nodes;
