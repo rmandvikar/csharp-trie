@@ -42,7 +42,6 @@
     <Compile Include="ITrie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Trie.cs" />
-    <Compile Include="TrieFactory.cs" />
     <Compile Include="TrieNode.cs" />
     <Compile Include="Wrapped.cs" />
   </ItemGroup>

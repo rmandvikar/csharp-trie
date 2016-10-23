@@ -40,14 +40,11 @@ namespace rm.Trie
 		/// Create a new TrieNode instance.
 		/// </summary>
 		/// <param name="character">The character for the TrieNode.</param>
-		/// <param name="children">Children of TrieNode.</param>
-		/// <param name="wordCount"></param>
-		internal TrieNode(char character, IDictionary<char, TrieNode> children,
-			int wordCount)
+		internal TrieNode(char character)
 		{
 			Character = character;
-			Children = children;
-			WordCount = wordCount;
+			Children = new Dictionary<char, TrieNode>();
+			WordCount = 0;
 		}
 
 		#endregion

@@ -47,7 +47,7 @@ int UniqueCount();
 
 ```c#
 // Create a new trie.
-ITrie trie = TrieFactory.CreateTrie();
+ITrie trie = new Trie();
 
 // Add words.
 trie.AddWord("test");

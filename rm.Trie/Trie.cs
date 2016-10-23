@@ -24,10 +24,9 @@ namespace rm.Trie
 		/// <summary>
 		/// Create a new Trie instance.
 		/// </summary>
-		/// <param name="rootTrieNode">The root TrieNode.</param>
-		internal Trie(TrieNode rootTrieNode)
+		internal Trie()
 		{
-			this.rootTrieNode = rootTrieNode;
+			rootTrieNode = new TrieNode(' ');
 		}
 
 		#endregion
@@ -195,7 +194,7 @@ namespace rm.Trie
 				var child = trieNode.GetChild(c);
 				if (child == null)
 				{
-					child = TrieFactory.CreateTrieNode(c);
+					child = new TrieNode(c);
 					trieNode.SetChild(child);
 				}
 				trieNode = child;

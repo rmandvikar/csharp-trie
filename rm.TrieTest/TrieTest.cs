@@ -127,7 +127,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void AddWord_EmptyString01()
 		{
-			trie = TrieFactory.CreateTrie();
+			trie = new Trie();
 			Assert.AreEqual(0, trie.GetWords().Count);
 			trie.AddWord("");
 			Assert.AreNotEqual(0, trie.GetWords().Count);
@@ -135,7 +135,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void AddWord_RemoveWord01()
 		{
-			var trie = TrieFactory.CreateTrie();
+			var trie = new Trie();
 			trie.AddWord("");
 			trie.AddWord("");
 			Assert.AreEqual(1, trie.GetWords().Count);
@@ -201,7 +201,7 @@ namespace rm.Trie.Test
 
 		private ITrie BuildSampleTrie()
 		{
-			ITrie trie = TrieFactory.CreateTrie();
+			ITrie trie = new Trie();
 			string[] strings =
 			{
 				"123", "1", "23", "1",
