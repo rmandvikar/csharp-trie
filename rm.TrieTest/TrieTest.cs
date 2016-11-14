@@ -95,17 +95,18 @@ namespace rm.Trie.Test
 		[Test]
 		public void RemoveWord01()
 		{
-			trie.RemoveWord("this");
+			Assert.AreEqual(1, trie.RemoveWord("this"));
 			Assert.AreEqual(9, trie.GetWords().Count);
-			trie.RemoveWord("the");
+			Assert.AreEqual(1, trie.RemoveWord("the"));
 			Assert.AreEqual(8, trie.GetWords().Count);
 			Assert.Throws<ArgumentOutOfRangeException>(() => trie.RemoveWord("te"));
 			Assert.AreEqual(8, trie.GetWords().Count);
-			trie.RemoveWord("test");
+			Assert.AreEqual(1, trie.RemoveWord("test"));
 			Assert.AreEqual(7, trie.GetWords().Count);
 			Assert.Throws<ArgumentOutOfRangeException>(() => trie.RemoveWord("word not present"));
 			Assert.AreEqual(7, trie.GetWords().Count);
-			trie.RemoveWord("123");
+			Assert.AreEqual(1, trie.RemoveWord("123"));
+			Assert.AreEqual(2, trie.RemoveWord("1"));
 			foreach (var word in trie.GetWords())
 			{
 				trie.RemoveWord(word);
@@ -139,11 +140,11 @@ namespace rm.Trie.Test
 			trie.AddWord("");
 			trie.AddWord("");
 			Assert.AreEqual(1, trie.GetWords().Count);
-			trie.RemoveWord("");
+			Assert.AreEqual(2, trie.RemoveWord(""));
 			Assert.AreEqual(0, trie.GetWords().Count);
 			trie.AddWord("");
 			Assert.AreEqual(1, trie.GetWords().Count);
-			trie.RemoveWord("");
+			Assert.AreEqual(1, trie.RemoveWord(""));
 			Assert.AreEqual(0, trie.GetWords().Count);
 		}
 		[Test]

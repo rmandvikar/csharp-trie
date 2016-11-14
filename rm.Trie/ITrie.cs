@@ -15,7 +15,8 @@ namespace rm.Trie
 		/// <summary>
 		/// Remove word from the Trie.
 		/// </summary>
-		void RemoveWord(string word);
+		/// <returns>Count of words removed.</returns>
+		int RemoveWord(string word);
 
 		/// <summary>
 		/// Remove words by prefix from the Trie.

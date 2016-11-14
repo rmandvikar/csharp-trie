@@ -48,13 +48,14 @@ namespace rm.Trie
 		/// <summary>
 		/// Remove word from the Trie.
 		/// </summary>
-		public void RemoveWord(string word)
+		/// <returns>Count of words removed.</returns>
+		public int RemoveWord(string word)
 		{
 			if (word == null)
 			{
 				throw new ArgumentNullException(nameof(word));
 			}
-			RemoveWord(GetTrieNodesStack(word));
+			return RemoveWord(GetTrieNodesStack(word));
 		}
 
 		/// <summary>
@@ -330,8 +331,9 @@ namespace rm.Trie
 		/// <summary>
 		/// Remove unneeded nodes except root from stack of trieNodes.
 		/// </summary>
-		private void RemoveWord(Stack<TrieNode> trieNodes)
+		private int RemoveWord(Stack<TrieNode> trieNodes)
 		{
+			var removeCount = trieNodes.Peek().WordCount;
 			// Mark the last trieNode as not a word
 			trieNodes.Peek().WordCount = 0;
 			while (trieNodes.Count > 1)
@@ -344,6 +346,7 @@ namespace rm.Trie
 				}
 				parentTrieNode.RemoveChild(trieNode.Character);
 			}
+			return removeCount;
 		}
 
 		/// <summary>

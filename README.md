@@ -10,7 +10,7 @@ A trie (prefix tree) data structure implementation in C#.
 void AddWord(string word);
 
 // Remove word from the Trie.
-void RemoveWord(string word);
+int RemoveWord(string word);
 
 // Remove words by prefix from the Trie.
 void RemovePrefix(string prefix);
@@ -66,7 +66,7 @@ var hasWord = trie.HasWord("test");
 var wordCount = trie.WordCount("test");
 
 // Remove word.
-trie.RemoveWord("test");
+int removeCount = trie.RemoveWord("test"); // removeCount = 1
 
 // Remove words by prefix.
 trie.RemovePrefix("thi");
