@@ -75,10 +75,7 @@ namespace rm.Trie
 		/// </summary>
 		public ICollection<string> GetWords()
 		{
-			var words = new List<string>();
-			var buffer = new StringBuilder();
-			GetWords(rootTrieNode, words, buffer);
-			return words;
+			return GetWords("");
 		}
 
 		/// <summary>
@@ -92,13 +89,9 @@ namespace rm.Trie
 			}
 			// Empty list if no prefix match
 			var words = new List<string>();
-			var trieNode = GetTrieNode(prefix);
-			if (trieNode != null)
-			{
-				var buffer = new StringBuilder();
-				buffer.Append(prefix);
-				GetWords(trieNode, words, buffer);
-			}
+			var buffer = new StringBuilder();
+			buffer.Append(prefix);
+			GetWords(GetTrieNode(prefix), words, buffer);
 			return words;
 		}
 
@@ -228,6 +221,10 @@ namespace rm.Trie
 		private void GetWords(TrieNode trieNode, ICollection<string> words,
 			StringBuilder buffer)
 		{
+			if (trieNode == null)
+			{
+				return;
+			}
 			if (trieNode.IsWord)
 			{
 				words.Add(buffer.ToString());
