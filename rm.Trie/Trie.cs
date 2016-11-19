@@ -67,12 +67,7 @@ namespace rm.Trie
 			{
 				throw new ArgumentNullException(nameof(prefix));
 			}
-			var trieNodes = GetTrieNodesStack(prefix, false);
-			// Clear last trieNode, no need to remove unneeded nodes
-			if (trieNodes.Any())
-			{
-				trieNodes.Pop().Clear();
-			}
+			RemovePrefix(GetTrieNodesStack(prefix, false));
 		}
 
 		/// <summary>
@@ -329,13 +324,40 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Remove unneeded nodes except root from stack of trieNodes.
+		/// Remove word and trim.
 		/// </summary>
 		private int RemoveWord(Stack<TrieNode> trieNodes)
 		{
 			var removeCount = trieNodes.Peek().WordCount;
 			// Mark the last trieNode as not a word
 			trieNodes.Peek().WordCount = 0;
+			// Trim excess trieNodes
+			Trim(trieNodes);
+			return removeCount;
+		}
+
+		/// <summary>
+		/// Remove prefix and trim.
+		/// </summary>
+		private void RemovePrefix(Stack<TrieNode> trieNodes)
+		{
+			if (trieNodes.Any())
+			{
+				// Clear the last trieNode
+				trieNodes.Peek().Clear();
+				// Trim excess trieNodes
+				Trim(trieNodes);
+			}
+		}
+
+		/// <summary>
+		/// Removes unneeded trieNodes going up from a trieNode to root. 
+		/// </summary>
+		/// <remarks>
+		/// TrieNode, except root, that is not a word or has no children can be removed.
+		/// </remarks>
+		private void Trim(Stack<TrieNode> trieNodes)
+		{
 			while (trieNodes.Count > 1)
 			{
 				var trieNode = trieNodes.Pop();
@@ -346,7 +368,6 @@ namespace rm.Trie
 				}
 				parentTrieNode.RemoveChild(trieNode.Character);
 			}
-			return removeCount;
 		}
 
 		/// <summary>
