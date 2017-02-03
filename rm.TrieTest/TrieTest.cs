@@ -18,6 +18,7 @@ namespace rm.Trie.Test
 		{
 			trie = BuildSampleTrie();
 		}
+
 		[TearDown]
 		public void TearDown()
 		{
@@ -32,66 +33,77 @@ namespace rm.Trie.Test
 			var words = trie.GetWords();
 			Assert.AreEqual(10, words.Count);
 		}
+
 		[Test]
 		public void GetWords_Prefix01()
 		{
 			var prefixWordsEmpty = trie.GetWords("");
 			Assert.AreEqual(10, prefixWordsEmpty.Count);
 		}
+
 		[Test]
 		public void GetWords_Prefix02()
 		{
 			var prefixWords1 = trie.GetWords("th");
 			Assert.AreEqual(2, prefixWords1.Count);
 		}
+
 		[Test]
 		public void GetWords_Prefix03()
 		{
 			var prefixWords1Upper = trie.GetWords("TH");
 			Assert.AreEqual(1, prefixWords1Upper.Count);
 		}
+
 		[Test]
 		public void GetWords_Prefix04()
 		{
 			var prefixWords2 = trie.GetWords("z");
 			Assert.AreEqual(0, prefixWords2.Count);
 		}
+
 		[Test]
 		public void GetWords_Prefix05()
 		{
 			var prefixWords2Upper = trie.GetWords("Z");
 			Assert.AreEqual(0, prefixWords2Upper.Count);
 		}
+
 		[Test]
 		public void GetWords_Prefix06()
 		{
 			var prefixWords3Digits = trie.GetWords("1");
 			Assert.AreEqual(2, prefixWords3Digits.Count);
 		}
+
 		[Test]
 		public void HasWord01()
 		{
 			bool hasWord1 = trie.HasWord("test");
 			Assert.IsTrue(hasWord1);
 		}
+
 		[Test]
 		public void HasWord02()
 		{
 			bool hasWord1Upper = trie.HasWord("TEST");
 			Assert.IsFalse(hasWord1Upper);
 		}
+
 		[Test]
 		public void HasWord03()
 		{
 			bool hasWord2 = trie.HasWord("zz");
 			Assert.IsFalse(hasWord2);
 		}
+
 		[Test]
 		public void HasWord04()
 		{
 			bool hasWord2Upper = trie.HasWord("ZZ");
 			Assert.IsFalse(hasWord2Upper);
 		}
+
 		[Test]
 		public void RemoveWord01()
 		{
@@ -113,6 +125,7 @@ namespace rm.Trie.Test
 			}
 			Assert.AreEqual(0, trie.GetWords().Count);
 		}
+
 		[Test]
 		public void RemovePrefix01()
 		{
@@ -125,6 +138,7 @@ namespace rm.Trie.Test
 			trie.RemovePrefix("");
 			Assert.AreEqual(0, trie.GetWords().Count);
 		}
+
 		[Test]
 		public void AddWord_EmptyString01()
 		{
@@ -133,6 +147,7 @@ namespace rm.Trie.Test
 			trie.AddWord("");
 			Assert.AreNotEqual(0, trie.GetWords().Count);
 		}
+
 		[Test]
 		public void AddWord_RemoveWord01()
 		{
@@ -147,6 +162,7 @@ namespace rm.Trie.Test
 			Assert.AreEqual(1, trie.RemoveWord(""));
 			Assert.AreEqual(0, trie.GetWords().Count);
 		}
+
 		[Test]
 		public void GetLongestWords01()
 		{
@@ -155,6 +171,7 @@ namespace rm.Trie.Test
 			var longestWords = trie.GetLongestWords();
 			Assert.AreEqual(expected, longestWords);
 		}
+
 		[Test]
 		public void GetLongestWords02()
 		{
@@ -164,6 +181,7 @@ namespace rm.Trie.Test
 			var longestWords = trie.GetLongestWords();
 			Assert.AreEqual(expected, longestWords);
 		}
+
 		[Test]
 		public void GetShortestWords01()
 		{
@@ -172,6 +190,7 @@ namespace rm.Trie.Test
 			var shortestWords = trie.GetShortestWords();
 			Assert.AreEqual(expected, shortestWords);
 		}
+
 		[Test]
 		public void GetShortestWords02()
 		{
@@ -180,6 +199,7 @@ namespace rm.Trie.Test
 			var shortestWords = trie.GetShortestWords();
 			Assert.AreEqual(expected, shortestWords);
 		}
+
 		[Test]
 		public void Clear01()
 		{
@@ -187,11 +207,13 @@ namespace rm.Trie.Test
 			trie.Clear();
 			Assert.AreEqual(0, trie.GetWords().Count);
 		}
+
 		[Test]
 		public void Count01()
 		{
 			Assert.AreEqual(11, trie.Count());
 		}
+
 		[Test]
 		public void UniqueCount01()
 		{
