@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace rm.Trie
 {
 	/// <summary>
-	/// TrieNode is an internal object to encapsulate recursive, helper etc. methods. 
+	/// TrieNode is an internal object to encapsulate recursive, helper etc. methods.
 	/// </summary>
+	[DebuggerDisplay("Character = {Character}")]
 	internal class TrieNode
 	{
 		#region data members
@@ -38,7 +40,7 @@ namespace rm.Trie
 		#region constructors
 
 		/// <summary>
-		/// Create a new TrieNode instance.
+		/// Creates a new TrieNode instance.
 		/// </summary>
 		/// <param name="character">The character for the TrieNode.</param>
 		internal TrieNode(char character)
@@ -51,15 +53,6 @@ namespace rm.Trie
 		#endregion
 
 		#region methods
-
-		/// <summary>
-		/// For readability.
-		/// </summary>
-		/// <returns>Character.</returns>
-		public override string ToString()
-		{
-			return Character.ToString();
-		}
 
 		public override bool Equals(object obj)
 		{

@@ -8,28 +8,28 @@ namespace rm.Trie
 	public interface ITrie
 	{
 		/// <summary>
-		/// Add a word to the Trie.
+		/// Adds a word to the Trie.
 		/// </summary>
 		void AddWord(string word);
 
 		/// <summary>
-		/// Remove word from the Trie.
+		/// Removes word from the Trie.
 		/// </summary>
 		/// <returns>Count of words removed.</returns>
 		int RemoveWord(string word);
 
 		/// <summary>
-		/// Remove words by prefix from the Trie.
+		/// Removes words by prefix from the Trie.
 		/// </summary>
 		void RemovePrefix(string prefix);
 
 		/// <summary>
-		/// Get all words in the Trie.
+		/// Gets all words in the Trie.
 		/// </summary>
 		ICollection<string> GetWords();
 
 		/// <summary>
-		/// Get words for given prefix.
+		/// Gets words for given prefix.
 		/// </summary>
 		ICollection<string> GetWords(string prefix);
 
@@ -44,27 +44,27 @@ namespace rm.Trie
 		int WordCount(string word);
 
 		/// <summary>
-		/// Get longest words from the Trie.
+		/// Gets longest words from the Trie.
 		/// </summary>
 		ICollection<string> GetLongestWords();
 
 		/// <summary>
-		/// Get shortest words from the Trie.
+		/// Gets shortest words from the Trie.
 		/// </summary>
 		ICollection<string> GetShortestWords();
 
 		/// <summary>
-		/// Clear all words from the Trie.
+		/// Clears all words from the Trie.
 		/// </summary>
 		void Clear();
 
 		/// <summary>
-		/// Get total word count in the Trie.
+		/// Gets total word count in the Trie.
 		/// </summary>
 		int Count();
 
 		/// <summary>
-		/// Get unique word count in the Trie.
+		/// Gets unique word count in the Trie.
 		/// </summary>
 		int UniqueCount();
 	}

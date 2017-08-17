@@ -22,7 +22,7 @@ namespace rm.Trie
 		#region Ctors
 
 		/// <summary>
-		/// Create a new Trie instance.
+		/// Creates a new Trie instance.
 		/// </summary>
 		internal Trie()
 		{
@@ -34,7 +34,7 @@ namespace rm.Trie
 		#region ITrie methods
 
 		/// <summary>
-		/// Add a word to the Trie.
+		/// Adds a word to the Trie.
 		/// </summary>
 		public void AddWord(string word)
 		{
@@ -46,7 +46,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Remove word from the Trie.
+		/// Removes word from the Trie.
 		/// </summary>
 		/// <returns>Count of words removed.</returns>
 		public int RemoveWord(string word)
@@ -59,7 +59,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Remove words by prefix from the Trie.
+		/// Removes words by prefix from the Trie.
 		/// </summary>
 		public void RemovePrefix(string prefix)
 		{
@@ -71,7 +71,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get all words in the Trie.
+		/// Gets all words in the Trie.
 		/// </summary>
 		public ICollection<string> GetWords()
 		{
@@ -79,7 +79,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get words for given prefix.
+		/// Gets words for given prefix.
 		/// </summary>
 		public ICollection<string> GetWords(string prefix)
 		{
@@ -122,7 +122,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get longest words from the Trie.
+		/// Gets longest words from the Trie.
 		/// </summary>
 		public ICollection<string> GetLongestWords()
 		{
@@ -134,7 +134,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get shortest words from the Trie.
+		/// Gets shortest words from the Trie.
 		/// </summary>
 		public ICollection<string> GetShortestWords()
 		{
@@ -146,7 +146,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Clear all words from the Trie.
+		/// Clears all words from the Trie.
 		/// </summary>
 		public void Clear()
 		{
@@ -154,7 +154,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get total word count in the Trie.
+		/// Gets total word count in the Trie.
 		/// </summary>
 		public int Count()
 		{
@@ -164,7 +164,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get unique word count in the Trie.
+		/// Gets unique word count in the Trie.
 		/// </summary>
 		public int UniqueCount()
 		{
@@ -178,7 +178,7 @@ namespace rm.Trie
 		#region Private methods
 
 		/// <summary>
-		/// Get the equivalent TrieNode in the Trie for given prefix. 
+		/// Gets the equivalent TrieNode in the Trie for given prefix. 
 		/// If prefix not present, then return null.
 		/// </summary>
 		private TrieNode GetTrieNode(string prefix)
@@ -196,9 +196,12 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Recursive method to add word. Gets the first char of the word, 
-		/// creates the child TrieNode if null, and recurses with the first
-		/// char removed from the word. If the word length is 0, return.
+		/// Adds words recursively.
+		/// <para>
+		/// Gets the first char of the word, creates the child TrieNode if null, 
+		/// and recurses with the first char removed from the word. If the word
+		/// length is 0, return.
+		/// </para>
 		/// </summary>
 		private void AddWord(TrieNode trieNode, char[] word)
 		{
@@ -216,7 +219,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Recursive method to get all the words starting from given TrieNode.
+		/// Gets all the words recursively starting from given TrieNode.
 		/// </summary>
 		private void GetWords(TrieNode trieNode, ICollection<string> words,
 			StringBuilder buffer)
@@ -239,7 +242,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Recursive method to get longest words starting from given TrieNode.
+		/// Gets longest words recursively starting from given TrieNode.
 		/// </summary>
 		private void GetLongestWords(TrieNode trieNode,
 			ICollection<string> longestWords, StringBuilder buffer, Wrapped<int> length)
@@ -266,7 +269,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Recursive method to get shortest words starting from given TrieNode.
+		/// Gets shortest words recursively starting from given TrieNode.
 		/// </summary>
 		private void GetShortestWords(TrieNode trieNode,
 			ICollection<string> shortestWords, StringBuilder buffer, Wrapped<int> length)
@@ -293,7 +296,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get stack of trieNodes for given string.
+		/// Gets stack of trieNodes for given string.
 		/// </summary>
 		private Stack<TrieNode> GetTrieNodesStack(string s, bool isWord = true)
 		{
@@ -321,7 +324,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Remove word and trim.
+		/// Removes word and trims.
 		/// </summary>
 		private int RemoveWord(Stack<TrieNode> trieNodes)
 		{
@@ -334,7 +337,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Remove prefix and trim.
+		/// Removes prefix and trims.
 		/// </summary>
 		private void RemovePrefix(Stack<TrieNode> trieNodes)
 		{
@@ -348,7 +351,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Removes unneeded trieNodes going up from a trieNode to root. 
+		/// Removes unneeded trieNodes going up from a trieNode to root.
 		/// </summary>
 		/// <remarks>
 		/// TrieNode, except root, that is not a word or has no children can be removed.
@@ -368,7 +371,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Get word count in the Trie.
+		/// Gets word count in the Trie.
 		/// </summary>
 		private void GetCount(TrieNode trieNode, Wrapped<int> count, bool isUnique)
 		{
