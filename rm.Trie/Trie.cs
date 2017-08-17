@@ -10,16 +10,16 @@ namespace rm.Trie
 	/// </summary>
 	public class Trie : ITrie
 	{
-		#region Data Members
+		#region data members
 
 		/// <summary>
 		/// Root TrieNode.
 		/// </summary>
-		private TrieNode rootTrieNode { get; set; }
+		private readonly TrieNode rootTrieNode;
 
 		#endregion
 
-		#region Ctors
+		#region ctors
 
 		/// <summary>
 		/// Creates a new Trie instance.

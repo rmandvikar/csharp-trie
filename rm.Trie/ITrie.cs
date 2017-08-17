@@ -5,6 +5,9 @@ namespace rm.Trie
 	/// <summary>
 	/// Interface for Trie data structure.
 	/// </summary>
+	/// <remarks>
+	/// ITrie does not inherit from ITrieMap{TValue} for flexibility.
+	/// </remarks>
 	public interface ITrie
 	{
 		/// <summary>
