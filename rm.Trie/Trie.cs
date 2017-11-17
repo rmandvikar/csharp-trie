@@ -8,7 +8,7 @@ namespace rm.Trie
 	/// <summary>
 	/// Trie data structure.
 	/// </summary>
-	internal class Trie : ITrie
+	public class Trie : ITrie
 	{
 		#region Data Members
 
@@ -24,7 +24,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Creates a new Trie instance.
 		/// </summary>
-		internal Trie()
+		public Trie()
 		{
 			rootTrieNode = new TrieNode(' ');
 		}
@@ -119,6 +119,19 @@ namespace rm.Trie
 		}
 
 		/// <summary>
+		/// Gets the equivalent TrieNode in the Trie for given prefix. 
+		/// If prefix not present, then returns null.
+		/// </summary>
+		public TrieNode GetTrieNode(string prefix)
+		{
+			if (prefix == null)
+			{
+				throw new ArgumentNullException(nameof(prefix));
+			}
+			return rootTrieNode.GetTrieNode(prefix);
+		}
+
+		/// <summary>
 		/// Returns the count for the word in the Trie.
 		/// </summary>
 		public int WordCount(string word)
@@ -183,27 +196,17 @@ namespace rm.Trie
 			return count.Value;
 		}
 
+		/// <summary>
+		/// Gets the root TrieNode of the Trie.
+		/// </summary>
+		public TrieNode GetRootTrieNode()
+		{
+			return rootTrieNode;
+		}
+
 		#endregion
 
-		#region Private methods
-
-		/// <summary>
-		/// Gets the equivalent TrieNode in the Trie for given prefix. 
-		/// If prefix not present, then return null.
-		/// </summary>
-		private TrieNode GetTrieNode(string prefix)
-		{
-			var trieNode = rootTrieNode;
-			foreach (var prefixChar in prefix)
-			{
-				trieNode = trieNode.GetChild(prefixChar);
-				if (trieNode == null)
-				{
-					break;
-				}
-			}
-			return trieNode;
-		}
+		#region private methods
 
 		/// <summary>
 		/// Adds words recursively.

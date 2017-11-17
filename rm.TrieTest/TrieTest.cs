@@ -249,6 +249,38 @@ namespace rm.Trie.Test
 			Assert.AreEqual(10, trie.UniqueCount());
 		}
 
+		[Test]
+		public void GetTrieNode01()
+		{
+			var teNode = trie.GetTrieNode("te");
+			Assert.IsNotNull(teNode);
+			Assert.AreEqual('e', teNode.Character);
+			Assert.IsTrue(teNode.HasChild('s'));
+			var tesNode = teNode.GetChild('s');
+			Assert.AreEqual('s', tesNode.Character);
+			Assert.IsFalse(tesNode.IsWord);
+			var testNode = teNode.GetTrieNode("st");
+			Assert.AreEqual('t', testNode.Character);
+			Assert.IsTrue(testNode.IsWord);
+		}
+
+		[Test]
+		public void GetTrieNode02()
+		{
+			var teNode = trie.GetTrieNode("te");
+			Assert.IsFalse(teNode.HasChild('z'));
+			var tezNode = teNode.GetChild('z');
+			Assert.IsNull(tezNode);
+		}
+
+		[Test]
+		public void GetRoot01()
+		{
+			var root = trie.GetRootTrieNode();
+			Assert.IsNotNull(root);
+			Assert.AreEqual(' ', root.Character);
+		}
+
 		#endregion
 
 		private ITrie BuildSampleTrie()

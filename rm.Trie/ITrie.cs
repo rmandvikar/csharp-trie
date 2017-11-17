@@ -44,6 +44,12 @@ namespace rm.Trie
 		bool HasPrefix(string prefix);
 
 		/// <summary>
+		/// Gets the equivalent TrieNode in the Trie for given prefix. 
+		/// If prefix not present, then returns null.
+		/// </summary>
+		TrieNode GetTrieNode(string prefix);
+
+		/// <summary>
 		/// Returns the count for the word in the Trie.
 		/// </summary>
 		int WordCount(string word);
@@ -72,5 +78,10 @@ namespace rm.Trie
 		/// Gets unique word count in the Trie.
 		/// </summary>
 		int UniqueCount();
+
+		/// <summary>
+		/// Gets the root TrieNode of the Trie.
+		/// </summary>
+		TrieNode GetRootTrieNode();
 	}
 }

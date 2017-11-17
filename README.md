@@ -32,6 +32,9 @@ bool HasWord(string word);
 // Returns true if the prefix is present in the Trie.
 bool HasPrefix(string prefix);
 
+// Gets the equivalent TrieNode in the Trie for given prefix.
+TrieNode GetTrieNode(string prefix)
+
 // Returns the count for the word in the Trie.
 int WordCount(string word);
 
@@ -49,6 +52,9 @@ int Count();
 
 // Gets unique word count in the Trie.
 int UniqueCount();
+
+// Gets the root trieNode.
+TrieNode GetRootTrieNode();
 ```
 
 ### Example
@@ -73,6 +79,12 @@ var hasWord = trie.HasWord("test");
 // Checks if a prefix is present.
 var hasPrefix = trie.HasPrefix("tes");
 
+// Gets trieNode for prefix.
+TrieNode trieNode = trie.GetTrieNode("tes");
+
+// Gets trieNode from trieNode by prefix.
+TrieNode testTrieNode = trieNode.GetTrieNode("t");
+
 // Gets word count for a word.
 var wordCount = trie.WordCount("test");
 
@@ -95,6 +107,10 @@ trie.Clear();
 trie.AddWord("test"); // adding "test" again
 var count = trie.Count();
 var uniqueCount = trie.UniqueCount();
+
+// Gets the root trieNode.
+var root = trie.GetRootTrieNode();
+
 ```
 
 #### Note: 

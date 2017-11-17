@@ -8,14 +8,14 @@ namespace rm.Trie
 	/// TrieNode is an internal object to encapsulate recursive, helper etc. methods.
 	/// </summary>
 	[DebuggerDisplay("Character = {Character}")]
-	internal class TrieNode
+	public class TrieNode
 	{
 		#region data members
 
 		/// <summary>
 		/// The character for the TrieNode.
 		/// </summary>
-		internal char Character { get; private set; }
+		public char Character { get; private set; }
 
 		/// <summary>
 		/// Children Character->TrieNode map.
@@ -25,7 +25,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Boolean to indicate whether the root to this node forms a word.
 		/// </summary>
-		internal bool IsWord
+		public bool IsWord
 		{
 			get { return WordCount > 0; }
 		}
@@ -33,7 +33,7 @@ namespace rm.Trie
 		/// <summary>
 		/// The count of words for the TrieNode.
 		/// </summary>
-		internal int WordCount { get; set; }
+		public int WordCount { get; internal set; }
 
 		#endregion
 
@@ -68,18 +68,6 @@ namespace rm.Trie
 			return Character.GetHashCode();
 		}
 
-		internal IEnumerable<TrieNode> GetChildren()
-		{
-			return Children.Values;
-		}
-
-		internal TrieNode GetChild(char character)
-		{
-			TrieNode trieNode;
-			Children.TryGetValue(character, out trieNode);
-			return trieNode;
-		}
-
 		internal void SetChild(TrieNode child)
 		{
 			if (child == null)
@@ -98,6 +86,37 @@ namespace rm.Trie
 		{
 			WordCount = 0;
 			Children.Clear();
+		}
+
+		public TrieNode GetChild(char character)
+		{
+			TrieNode trieNode;
+			Children.TryGetValue(character, out trieNode);
+			return trieNode;
+		}
+
+		public bool HasChild(char character)
+		{
+			return GetChild(character) != null;
+		}
+
+		public TrieNode GetTrieNode(string prefix)
+		{
+			TrieNode trieNode = this;
+			foreach (var prefixChar in prefix)
+			{
+				trieNode = trieNode.GetChild(prefixChar);
+				if (trieNode == null)
+				{
+					break;
+				}
+			}
+			return trieNode;
+		}
+
+		public IEnumerable<TrieNode> GetChildren()
+		{
+			return Children.Values;
 		}
 
 		#endregion
