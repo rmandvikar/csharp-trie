@@ -105,6 +105,34 @@ namespace rm.Trie.Test
 		}
 
 		[Test]
+		public void HasPrefix01()
+		{
+			bool hasPrefix1 = trie.HasPrefix("tes");
+			Assert.IsTrue(hasPrefix1);
+		}
+
+		[Test]
+		public void HasPrefix02()
+		{
+			bool hasPrefix2 = trie.HasPrefix("test");
+			Assert.IsTrue(hasPrefix2);
+		}
+
+		[Test]
+		public void HasPrefix03()
+		{
+			bool hasPrefix1Upper = trie.HasPrefix("TES");
+			Assert.IsFalse(hasPrefix1Upper);
+		}
+
+		[Test]
+		public void HasPrefix04()
+		{
+			bool hasPrefix2Upper = trie.HasPrefix("TEST");
+			Assert.IsFalse(hasPrefix2Upper);
+		}
+
+		[Test]
 		public void RemoveWord01()
 		{
 			Assert.AreEqual(1, trie.RemoveWord("this"));

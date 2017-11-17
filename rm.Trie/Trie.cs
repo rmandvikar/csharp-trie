@@ -96,7 +96,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Returns true or false if the word is present in the Trie.
+		/// Returns true if the word is present in the Trie.
 		/// </summary>
 		public bool HasWord(string word)
 		{
@@ -106,6 +106,18 @@ namespace rm.Trie
 			}
 			var trieNode = GetTrieNode(word);
 			return trieNode?.IsWord ?? false;
+		}
+
+		/// <summary>
+		/// Returns true if the prefix is present in the Trie.
+		/// </summary>
+		public bool HasPrefix(string prefix)
+		{
+			if (prefix == null)
+			{
+				throw new ArgumentNullException(nameof(prefix));
+			}
+			return GetTrieNode(prefix) != null;
 		}
 
 		/// <summary>

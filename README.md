@@ -21,8 +21,11 @@ ICollection<string> GetWords();
 // Gets words for given prefix.
 ICollection<string> GetWords(string prefix);
 
-// Returns true or false if the word is present in the Trie.
+// Returns true if the word is present in the Trie.
 bool HasWord(string word);
+
+// Returns true if the prefix is present in the Trie.
+bool HasPrefix(string prefix);
 
 // Returns the count for the word in the Trie.
 int WordCount(string word);
@@ -61,6 +64,9 @@ var tePrefixWords = trie.GetWords("te");
 
 // Checks if a word is present.
 var hasWord = trie.HasWord("test");
+
+// Checks if a prefix is present.
+var hasPrefix = trie.HasPrefix("tes");
 
 // Gets word count for a word.
 var wordCount = trie.WordCount("test");

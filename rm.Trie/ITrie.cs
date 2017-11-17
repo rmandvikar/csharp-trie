@@ -34,9 +34,14 @@ namespace rm.Trie
 		ICollection<string> GetWords(string prefix);
 
 		/// <summary>
-		/// Returns true or false if the word is present in the Trie.
+		/// Returns true if the word is present in the Trie.
 		/// </summary>
 		bool HasWord(string word);
+
+		/// <summary>
+		/// Returns true if the prefix is present in the Trie.
+		/// </summary>
+		bool HasPrefix(string prefix);
 
 		/// <summary>
 		/// Returns the count for the word in the Trie.
