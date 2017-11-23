@@ -21,10 +21,10 @@ int RemoveWord(string word);
 void RemovePrefix(string prefix);
 
 // Gets all words in the Trie.
-ICollection<string> GetWords();
+IEnumerable<string> GetWords();
 
 // Gets words for given prefix.
-ICollection<string> GetWords(string prefix);
+IEnumerable<string> GetWords(string prefix);
 
 // Returns true if the word is present in the Trie.
 bool HasWord(string word);

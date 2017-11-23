@@ -73,7 +73,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets all words in the Trie.
 		/// </summary>
-		public ICollection<string> GetWords()
+		public IEnumerable<string> GetWords()
 		{
 			return GetWords("");
 		}
@@ -81,18 +81,16 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets words for given prefix.
 		/// </summary>
-		public ICollection<string> GetWords(string prefix)
+		public IEnumerable<string> GetWords(string prefix)
 		{
 			if (prefix == null)
 			{
 				throw new ArgumentNullException(nameof(prefix));
 			}
-			// Empty list if no prefix match
-			var words = new List<string>();
-			var buffer = new StringBuilder();
-			buffer.Append(prefix);
-			GetWords(GetTrieNode(prefix), words, buffer);
-			return words;
+			foreach (var word in Traverse(GetTrieNode(prefix), new StringBuilder(prefix)))
+			{
+				yield return word;
+			}
 		}
 
 		/// <summary>
@@ -233,22 +231,23 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets all the words recursively starting from given TrieNode.
 		/// </summary>
-		private void GetWords(TrieNode trieNode, ICollection<string> words,
-			StringBuilder buffer)
+		private IEnumerable<string> Traverse(TrieNode trieNode, StringBuilder buffer)
 		{
 			if (trieNode == null)
 			{
-				return;
+				yield break;
 			}
 			if (trieNode.IsWord)
 			{
-				words.Add(buffer.ToString());
+				yield return buffer.ToString();
 			}
 			foreach (var child in trieNode.GetChildren())
 			{
 				buffer.Append(child.Character);
-				GetWords(child, words, buffer);
-				// Remove recent character
+				foreach (var word in Traverse(child, buffer))
+				{
+					yield return word;
+				}
 				buffer.Length--;
 			}
 		}
@@ -275,7 +274,6 @@ namespace rm.Trie
 			{
 				buffer.Append(child.Character);
 				GetLongestWords(child, longestWords, buffer, length);
-				// Remove recent character
 				buffer.Length--;
 			}
 		}
@@ -302,7 +300,6 @@ namespace rm.Trie
 			{
 				buffer.Append(child.Character);
 				GetShortestWords(child, shortestWords, buffer, length);
-				// Remove recent character
 				buffer.Length--;
 			}
 		}

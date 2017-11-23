@@ -26,12 +26,12 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets all words in the Trie.
 		/// </summary>
-		ICollection<string> GetWords();
+		IEnumerable<string> GetWords();
 
 		/// <summary>
 		/// Gets words for given prefix.
 		/// </summary>
-		ICollection<string> GetWords(string prefix);
+		IEnumerable<string> GetWords(string prefix);
 
 		/// <summary>
 		/// Returns true if the word is present in the Trie.
