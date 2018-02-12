@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netcoreapp2.0;net461</TargetFrameworks>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>A trie (prefix tree) data structure implementation in C#.</Description>
+    <PackageTags>trie prefix tree</PackageTags>
+    <RepositoryUrl>https://github.com/rmandvikar/csharp-trie</RepositoryUrl>
+    <Authors>hippy</Authors>
+    <Company>hippy</Company>
   </PropertyGroup>
 
 </Project>

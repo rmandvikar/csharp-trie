@@ -3,6 +3,11 @@ csharp-trie
 
 A trie (prefix tree) data structure implementation in C#.
 
+#### nuget:
+```
+Install-Package rm.Trie
+```
+
 ### Methods
 
 ```c#
