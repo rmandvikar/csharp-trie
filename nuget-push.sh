@@ -10,5 +10,5 @@ if [[ -z "$version" ]]; then
 fi
 
 dotnet nuget push rm.Trie/bin/Release/rm.Trie."$version".nupkg \
-	-k $(< ~/.nuget.apikey) \
+	-k $(< ~/dump/.nuget.apikey) \
 	-s https://api.nuget.org/v3/index.json
