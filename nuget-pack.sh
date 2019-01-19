@@ -13,7 +13,9 @@ fi
 
 tag="nuget-$version"
 
-dotnet pack -c Release rm.Trie/rm.Trie.csproj \
+dotnet pack rm.Trie/rm.Trie.csproj \
+	-c Release \
+	--include-symbols //p:SymbolPackageFormat=snupkg \
 	-o ../ \
 	//p:PackageVersion="$version" \
 	//p:PackageReleaseNotes="tag: $tag" \
