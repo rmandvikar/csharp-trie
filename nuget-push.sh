@@ -13,7 +13,7 @@ fi
 
 tag="nuget-$version"
 
-dotnet nuget push rm.Trie."$version".nupkg \
+dotnet nuget push .nupkg/rm.Trie."$version".nupkg \
 	-k $(< ~/dump/.nuget.apikey) \
 	-s https://api.nuget.org/v3/index.json \
 	&& git push $(git remote) "$tag"
