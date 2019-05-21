@@ -6,6 +6,6 @@ dotnet clean -c Release
 dotnet build Trie.sln \
 	-c Release \
 	-f netcoreapp2.0
-dotnet test rm.TrieTest/rm.TrieTest.csproj \
+dotnet test tests/rm.TrieTest/rm.TrieTest.csproj \
 	-c Release --no-build --no-restore \
 	-f netcoreapp2.0
