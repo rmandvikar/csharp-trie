@@ -9,4 +9,5 @@ dotnet build Trie.sln \
 dotnet test tests/rm.TrieTest/rm.TrieTest.csproj \
 	-c Release --no-build --no-restore \
 	-f netcoreapp3.1 \
-	-v normal
+	-v normal \
+	--filter "TestCategory!=very.slow"
