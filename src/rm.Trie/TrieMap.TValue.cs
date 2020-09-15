@@ -58,7 +58,8 @@ namespace rm.Trie
 			foreach (var value in
 				Traverse
 				(
-					GetTrieNode(keyPrefix), new StringBuilder(keyPrefix),
+					GetTrieNode(keyPrefix),
+					new StringBuilder(keyPrefix),
 					(kBuilder, v) => v
 				))
 			{
@@ -82,7 +83,8 @@ namespace rm.Trie
 			foreach (var key in
 				Traverse
 				(
-					rootTrieNode, new StringBuilder(),
+					rootTrieNode,
+					new StringBuilder(),
 					(kBuilder, v) => kBuilder.ToString()
 				))
 			{
@@ -98,7 +100,8 @@ namespace rm.Trie
 			foreach (var kvPair in
 				Traverse
 				(
-					rootTrieNode, new StringBuilder(),
+					rootTrieNode,
+					new StringBuilder(),
 					(kBuilder, v) => new KeyValuePair<string, TValue>(kBuilder.ToString(), v)
 				))
 			{
@@ -142,7 +145,7 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Gets the equivalent TrieNode in the TrieMap for given key prefix. 
+		/// Gets the equivalent TrieNode in the TrieMap for given key prefix.
 		/// If prefix not present, then returns null.
 		/// </summary>
 		public TrieNode<TValue> GetTrieNode(string keyPrefix)
@@ -209,10 +212,7 @@ namespace rm.Trie
 			}
 			if (trieNode.HasValue())
 			{
-				yield return transform
-				(
-					buffer, trieNode.Value
-				);
+				yield return transform(buffer, trieNode.Value);
 			}
 			foreach (var child in trieNode.GetChildren())
 			{

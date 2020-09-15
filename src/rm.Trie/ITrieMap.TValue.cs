@@ -49,7 +49,7 @@ namespace rm.Trie
 		bool HasKeyPrefix(string keyPrefix);
 
 		/// <summary>
-		/// Gets the equivalent TrieNode in the TrieMap for given key prefix. 
+		/// Gets the equivalent TrieNode in the TrieMap for given key prefix.
 		/// If prefix not present, then returns null.
 		/// </summary>
 		TrieNode<TValue> GetTrieNode(string keyPrefix);
