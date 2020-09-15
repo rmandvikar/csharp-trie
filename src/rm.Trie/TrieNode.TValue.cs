@@ -20,14 +20,8 @@ namespace rm.Trie
 			get { return _value; }
 			internal set
 			{
-				if (value == null)
-				{
-					hasValue = false;
-					_value = value;
-					return;
-				}
 				_value = value;
-				hasValue = true;
+				hasValue = value != null;
 			}
 		}
 		private bool hasValue;
