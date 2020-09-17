@@ -129,8 +129,14 @@ IEnumerable<TValue> ValuesBy(string keyPrefix);
 // Gets all TValue items from TrieMap.
 IEnumerable<TValue> Values();
 
+// Gets keys by key prefix from TrieMap.
+IEnumerable<string> KeysBy(string keyPrefix);
+
 // Gets all keys from TrieMap.
 IEnumerable<string> Keys();
+
+// Gets string->TValue pairs by key prefix from TrieMap.
+IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(string keyPrefix);
 
 // Gets all string->TValue pairs from TrieMap.
 IEnumerable<KeyValuePair<string, TValue>> KeyValuePairs();

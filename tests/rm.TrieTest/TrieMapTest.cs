@@ -111,6 +111,20 @@ namespace rm.Trie.Test
 		}
 
 		[Test]
+		public void KeysBy01()
+		{
+			Assert.AreEqual(2, trie.KeysBy("key1").Count());
+			Assert.AreEqual(1, trie.KeysBy("key123").Count());
+		}
+
+		[Test]
+		public void KeysBy02()
+		{
+			Assert.AreEqual(3, trieO.KeysBy("key1").Count());
+			Assert.AreEqual(1, trieO.KeysBy("key123").Count());
+		}
+
+		[Test]
 		public void KeyValuePairs01()
 		{
 			Assert.AreEqual(3, trie.KeyValuePairs().Count());
@@ -128,6 +142,30 @@ namespace rm.Trie.Test
 			Assert.AreEqual(4, trieO.KeyValuePairs().Count());
 			var keys = new HashSet<string> { "key123", "key23", "key1", "key10" };
 			foreach (var kv in trieO.KeyValuePairs())
+			{
+				Assert.IsTrue(keys.Contains(kv.Key)
+					&& kv.Value.Data == int.Parse(kv.Key.Replace("key", "")));
+			}
+		}
+
+		[Test]
+		public void KeyValuePairsBy01()
+		{
+			Assert.AreEqual(2, trie.KeyValuePairsBy("key1").Count());
+			var keys = new HashSet<string> { "key1", "key123" };
+			foreach (var kv in trie.KeyValuePairsBy("key1"))
+			{
+				Assert.IsTrue(keys.Contains(kv.Key)
+					&& kv.Value == int.Parse(kv.Key.Replace("key", "")));
+			}
+		}
+
+		[Test]
+		public void KeyValuePairsBy02()
+		{
+			Assert.AreEqual(3, trieO.KeyValuePairsBy("key1").Count());
+			var keys = new HashSet<string> { "key1", "key10", "key123" };
+			foreach (var kv in trieO.KeyValuePairsBy("key1"))
 			{
 				Assert.IsTrue(keys.Contains(kv.Key)
 					&& kv.Value.Data == int.Parse(kv.Key.Replace("key", "")));
