@@ -24,9 +24,19 @@ namespace rm.Trie
 		IEnumerable<TValue> Values();
 
 		/// <summary>
+		/// Gets keys by key prefix from TrieMap.
+		/// </summary>
+		IEnumerable<string> KeysBy(string keyPrefix);
+
+		/// <summary>
 		/// Gets all keys from TrieMap.
 		/// </summary>
 		IEnumerable<string> Keys();
+
+		/// <summary>
+		/// Gets string->TValue pairs by key prefix from TrieMap.
+		/// </summary>
+		IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(string keyPrefix);
 
 		/// <summary>
 		/// Gets all string->TValue pairs from TrieMap.
