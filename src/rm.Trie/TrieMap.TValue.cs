@@ -76,15 +76,19 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Gets all keys from TrieMap.
+		/// Gets keys by key prefix from TrieMap.
 		/// </summary>
-		public IEnumerable<string> Keys()
+		public IEnumerable<string> KeysBy(string keyPrefix)
 		{
+			if (keyPrefix == null)
+			{
+				throw new ArgumentNullException(nameof(keyPrefix));
+			}
 			foreach (var key in
 				Traverse
 				(
-					rootTrieNode,
-					new StringBuilder(),
+					GetTrieNode(keyPrefix),
+					new StringBuilder(keyPrefix),
 					(kBuilder, v) => kBuilder.ToString()
 				))
 			{
@@ -93,20 +97,40 @@ namespace rm.Trie
 		}
 
 		/// <summary>
-		/// Gets all string->TValue pairs from TrieMap.
+		/// Gets all keys from TrieMap.
 		/// </summary>
-		public IEnumerable<KeyValuePair<string, TValue>> KeyValuePairs()
+		public IEnumerable<string> Keys()
 		{
+			return KeysBy("");
+		}
+
+		/// <summary>
+		/// Gets string->TValue pairs by key prefix from TrieMap.
+		/// </summary>
+		public IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(string keyPrefix)
+		{
+			if (keyPrefix == null)
+			{
+				throw new ArgumentNullException(nameof(keyPrefix));
+			}
 			foreach (var kvPair in
 				Traverse
 				(
-					rootTrieNode,
-					new StringBuilder(),
+					GetTrieNode(keyPrefix),
+					new StringBuilder(keyPrefix),
 					(kBuilder, v) => new KeyValuePair<string, TValue>(kBuilder.ToString(), v)
 				))
 			{
 				yield return kvPair;
 			}
+		}
+
+		/// <summary>
+		/// Gets all string->TValue pairs from TrieMap.
+		/// </summary>
+		public IEnumerable<KeyValuePair<string, TValue>> KeyValuePairs()
+		{
+			return KeyValuePairsBy("");
 		}
 
 		/// <summary>
