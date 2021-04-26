@@ -19,28 +19,12 @@ namespace rm.Trie.Test
 			public int Data { get; set; }
 		}
 
-		private ITrieMap<int> trie;
-		private ITrieMap<ValueClass> trieO;
-
-		[SetUp]
-		public void SetUp()
-		{
-			trie = BuildSampleTrie();
-			trieO = BuildSampleTrieO();
-		}
-
-		[TearDown]
-		public void TearDown()
-		{
-			trie = null;
-			trieO = null;
-		}
-
 		#region Tests
 
 		[Test]
 		public void ValueBy01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(123, trie.ValueBy("key123"));
 			Assert.AreEqual(23, trie.ValueBy("key23"));
 			Assert.AreEqual(0, trie.ValueBy("key"));
@@ -49,6 +33,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void ValueBy02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(123, trieO.ValueBy("key123").Data);
 			Assert.AreEqual(23, trieO.ValueBy("key23").Data);
 			Assert.AreEqual(null, trieO.ValueBy("key"));
@@ -57,6 +42,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void Values01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(3, trie.Values().Count());
 			var values = new HashSet<int> { 123, 23, 1 };
 			Assert.IsTrue(values.OrderBy(x => x).SequenceEqual(trie.Values().OrderBy(x => x)));
@@ -65,6 +51,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void Values02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(4, trieO.Values().Count());
 			var values = new HashSet<int> { 123, 23, 1, 10 };
 			Assert.IsTrue
@@ -77,6 +64,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void ValuesBy01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(2, trie.ValuesBy("key1").Count());
 			Assert.AreEqual(1, trie.ValuesBy("key123").Count());
 		}
@@ -84,6 +72,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void ValuesBy02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(3, trieO.ValuesBy("key1").Count());
 			Assert.AreEqual(1, trieO.ValuesBy("key123").Count());
 		}
@@ -91,6 +80,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void Keys01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(3, trie.Keys().Count());
 			var keys = new HashSet<string> { "key123", "key23", "key1" };
 			foreach (var key in trie.Keys())
@@ -102,6 +92,8 @@ namespace rm.Trie.Test
 		[Test]
 		public void Keys02()
 		{
+			var trie = BuildSampleTrie();
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(4, trieO.Keys().Count());
 			var keys = new HashSet<string> { "key123", "key23", "key1", "key10" };
 			foreach (var key in trie.Keys())
@@ -113,6 +105,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void KeysBy01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(2, trie.KeysBy("key1").Count());
 			Assert.AreEqual(1, trie.KeysBy("key123").Count());
 		}
@@ -120,6 +113,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void KeysBy02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(3, trieO.KeysBy("key1").Count());
 			Assert.AreEqual(1, trieO.KeysBy("key123").Count());
 		}
@@ -127,6 +121,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void KeyValuePairs01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(3, trie.KeyValuePairs().Count());
 			var keys = new HashSet<string> { "key123", "key23", "key1", "key10" };
 			foreach (var kv in trie.KeyValuePairs())
@@ -139,6 +134,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void KeyValuePairs02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(4, trieO.KeyValuePairs().Count());
 			var keys = new HashSet<string> { "key123", "key23", "key1", "key10" };
 			foreach (var kv in trieO.KeyValuePairs())
@@ -151,6 +147,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void KeyValuePairsBy01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.AreEqual(2, trie.KeyValuePairsBy("key1").Count());
 			var keys = new HashSet<string> { "key1", "key123" };
 			foreach (var kv in trie.KeyValuePairsBy("key1"))
@@ -163,6 +160,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void KeyValuePairsBy02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.AreEqual(3, trieO.KeyValuePairsBy("key1").Count());
 			var keys = new HashSet<string> { "key1", "key10", "key123" };
 			foreach (var kv in trieO.KeyValuePairsBy("key1"))
@@ -175,6 +173,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void HasKey01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.IsTrue(trie.HasKey("key123"));
 			Assert.IsFalse(trie.HasKey("key"));
 		}
@@ -182,6 +181,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void HasKey02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.IsTrue(trieO.HasKey("key123"));
 			Assert.IsFalse(trieO.HasKey("key"));
 		}
@@ -189,6 +189,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void HasKeyPrefix01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.IsTrue(trie.HasKeyPrefix("key123"));
 			Assert.IsTrue(trie.HasKeyPrefix("key"));
 			Assert.IsFalse(trie.HasKeyPrefix("1"));
@@ -197,6 +198,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void HasKeyPrefix02()
 		{
+			var trieO = BuildSampleTrieO();
 			Assert.IsTrue(trieO.HasKeyPrefix("key123"));
 			Assert.IsTrue(trieO.HasKeyPrefix("key"));
 			Assert.IsFalse(trieO.HasKeyPrefix("1"));
@@ -205,6 +207,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void Remove01()
 		{
+			var trie = BuildSampleTrie();
 			trie.Remove("key123");
 			Assert.IsFalse(trie.HasKey("key123"));
 			Assert.Throws<ArgumentOutOfRangeException>(() => trie.Remove("key"));
@@ -214,6 +217,8 @@ namespace rm.Trie.Test
 		[Test]
 		public void Remove02()
 		{
+			var trie = BuildSampleTrie();
+			var trieO = BuildSampleTrieO();
 			trieO.Remove("key123");
 			Assert.IsFalse(trieO.HasKey("key123"));
 			Assert.Throws<ArgumentOutOfRangeException>(() => trie.Remove("key"));
@@ -223,6 +228,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void RemoveKeyPrefix01()
 		{
+			var trie = BuildSampleTrie();
 			Assert.IsTrue(trie.RemoveKeyPrefix("key123"));
 			Assert.IsFalse(trie.HasKey("key123"));
 			Assert.IsFalse(trie.RemoveKeyPrefix("x"));
@@ -233,6 +239,8 @@ namespace rm.Trie.Test
 		[Test]
 		public void RemoveKeyPrefix02()
 		{
+			var trie = BuildSampleTrie();
+			var trieO = BuildSampleTrieO();
 			Assert.IsTrue(trieO.RemoveKeyPrefix("key123"));
 			Assert.IsFalse(trieO.HasKey("key123"));
 			Assert.IsFalse(trie.RemoveKeyPrefix("x"));
@@ -243,6 +251,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void Clear01()
 		{
+			var trie = BuildSampleTrie();
 			trie.Clear();
 			Assert.IsFalse(trie.HasKey("key123"));
 			Assert.AreEqual(0, trie.Values().Count());
@@ -251,6 +260,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void Clear02()
 		{
+			var trieO = BuildSampleTrieO();
 			trieO.Clear();
 			Assert.IsFalse(trieO.HasKey("key123"));
 			Assert.AreEqual(0, trieO.Values().Count());
@@ -259,6 +269,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void GetTrieNode_NotNull01()
 		{
+			var trie = BuildSampleTrie();
 			var key1Node = trie.GetTrieNode("key1");
 			Assert.IsNotNull(key1Node);
 			Assert.AreEqual('1', key1Node.Character);
@@ -276,6 +287,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void GetTrieNode_NotNull02()
 		{
+			var trieO = BuildSampleTrieO();
 			var key1Node = trieO.GetTrieNode("key1");
 			Assert.IsNotNull(key1Node);
 			Assert.AreEqual('1', key1Node.Character);
@@ -294,6 +306,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void GetTrieNode_Null01()
 		{
+			var trie = BuildSampleTrie();
 			var key1Node = trie.GetTrieNode("key1");
 			var key1zNode = key1Node.GetChild('z');
 			Assert.IsNull(key1zNode);
@@ -302,6 +315,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void GetTrieNode_Null02()
 		{
+			var trieO = BuildSampleTrieO();
 			var key1Node = trieO.GetTrieNode("key1");
 			Assert.IsFalse(key1Node.HasChild('z'));
 			var key1zNode = key1Node.GetChild('z');
@@ -311,6 +325,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void GetRoot01()
 		{
+			var trie = BuildSampleTrie();
 			var root = trie.GetRootTrieNode();
 			Assert.IsNotNull(root);
 			Assert.AreEqual(' ', root.Character);
@@ -319,6 +334,7 @@ namespace rm.Trie.Test
 		[Test]
 		public void GetRoot02()
 		{
+			var trieO = BuildSampleTrieO();
 			var root = trieO.GetRootTrieNode();
 			Assert.IsNotNull(root);
 			Assert.AreEqual(' ', root.Character);
