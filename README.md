@@ -4,9 +4,6 @@ csharp-trie
 
 A trie (prefix tree) data structure implementation in C#.
 
-main: [![Build Status](https://travis-ci.org/rmandvikar/csharp-trie.svg?branch=main)](https://travis-ci.org/rmandvikar/csharp-trie)
-dev:  [![Build Status](https://travis-ci.org/rmandvikar/csharp-trie.svg?branch=dev)](https://travis-ci.org/rmandvikar/csharp-trie)
-
 main: ![Build Status](https://github.com/rmandvikar/csharp-trie/workflows/.NET/badge.svg?branch=main)
 dev:  ![Build Status](https://github.com/rmandvikar/csharp-trie/workflows/.NET/badge.svg?branch=dev)
 
