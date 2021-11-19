@@ -10,7 +10,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -22,6 +22,6 @@ jobs:
       run: |
         dotnet test tests/rm.TrieTest/rm.TrieTest.csproj \
           -c Release --no-build --no-restore \
-          -f net5.0 \
+          -f net6.0 \
           -v normal \
           --filter "TestCategory!=very.slow"
