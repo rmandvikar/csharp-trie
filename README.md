@@ -11,6 +11,7 @@ dev:  ![Build Status](https://github.com/rmandvikar/csharp-trie/workflows/.NET/b
 ```
 Install-Package rm.Trie
 ```
+[![NuGet version (rm.Trie)](https://img.shields.io/nuget/v/rm.Trie.svg?style=flat-square)](https://www.nuget.org/packages/rm.Trie/)
 
 ### Trie Methods
 
