@@ -13,11 +13,13 @@
     <RepositoryUrl>https://github.com/rmandvikar/csharp-trie</RepositoryUrl>
     <PackageProjectUrl>https://github.com/rmandvikar/csharp-trie</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Authors>hippy</Authors>
     <Company>hippy</Company>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
