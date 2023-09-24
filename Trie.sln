@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rm.Trie", "src\rm.Trie\rm.Trie.csproj", "{9610867E-7D5E-420A-9D9A-436201400A99}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rm.Trie", "src\rm.Trie\rm.Trie.csproj", "{9610867E-7D5E-420A-9D9A-436201400A99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rm.TrieTest", "tests\rm.TrieTest\rm.TrieTest.csproj", "{A4DC4F13-AD72-4A9B-B3A3-87A582C01FB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rm.TrieTest", "tests\rm.TrieTest\rm.TrieTest.csproj", "{A4DC4F13-AD72-4A9B-B3A3-87A582C01FB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16025984-A368-4B45-8B6C-847A809AF3BC}"
 	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject

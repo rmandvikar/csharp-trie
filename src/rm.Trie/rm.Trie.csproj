@@ -12,8 +12,12 @@
     <PackageTags>trie prefix tree</PackageTags>
     <RepositoryUrl>https://github.com/rmandvikar/csharp-trie</RepositoryUrl>
     <PackageProjectUrl>https://github.com/rmandvikar/csharp-trie</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>hippy</Authors>
     <Company>hippy</Company>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
