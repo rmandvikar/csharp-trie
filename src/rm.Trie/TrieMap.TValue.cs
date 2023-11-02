@@ -205,6 +205,18 @@ public class TrieMap<TValue> : ITrieMap<TValue>
 	}
 
 	/// <summary>
+	/// Gets string->TValue pair for longest prefix matching the word from the Trie.
+	/// </summary>
+	public KeyValuePair<string, TValue>? GetLongestPrefixMatch(string word)
+	{
+		if (word == null)
+		{
+			throw new ArgumentNullException(nameof(word));
+		}
+		return GetLongestPrefixMatch(rootTrieNode, word);
+	}
+
+	/// <summary>
 	/// Clears all values from TrieMap.
 	/// </summary>
 	public void Clear()
@@ -248,6 +260,25 @@ public class TrieMap<TValue> : ITrieMap<TValue>
 			}
 			buffer.Length--;
 		}
+	}
+
+	private KeyValuePair<string, TValue>? GetLongestPrefixMatch(TrieNode<TValue> trieNode,
+		string word)
+	{
+		var buffer = new StringBuilder();
+		foreach (var wordChar in word)
+		{
+			var child = trieNode.GetChild(wordChar);
+			if (child == null)
+			{
+				break;
+			}
+			buffer.Append(wordChar);
+			trieNode = child;
+		}
+		return trieNode.HasValue()
+			? new KeyValuePair<string, TValue>(buffer.ToString(), trieNode.Value)
+			: null;
 	}
 
 	#endregion
