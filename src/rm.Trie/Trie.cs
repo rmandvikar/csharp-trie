@@ -119,7 +119,7 @@ public class Trie : ITrie
 	}
 
 	/// <summary>
-	/// Gets the equivalent TrieNode in the Trie for given prefix. 
+	/// Gets the equivalent TrieNode in the Trie for given prefix.
 	/// If prefix not present, then returns null.
 	/// </summary>
 	public TrieNode GetTrieNode(string prefix)
@@ -211,7 +211,7 @@ public class Trie : ITrie
 	/// <summary>
 	/// Adds words recursively.
 	/// <para>
-	/// Gets the first char of the word, creates the child TrieNode if null, 
+	/// Gets the first char of the word, creates the child TrieNode if null,
 	/// and recurses with the first char removed from the word. If the word
 	/// length is 0, return.
 	/// </para>

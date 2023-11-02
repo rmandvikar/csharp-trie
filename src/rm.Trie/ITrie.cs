@@ -47,7 +47,7 @@ public interface ITrie
 	bool HasPrefix(string prefix);
 
 	/// <summary>
-	/// Gets the equivalent TrieNode in the Trie for given prefix. 
+	/// Gets the equivalent TrieNode in the Trie for given prefix.
 	/// If prefix not present, then returns null.
 	/// </summary>
 	TrieNode GetTrieNode(string prefix);
