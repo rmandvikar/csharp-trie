@@ -169,6 +169,18 @@ public class Trie : ITrie
 	}
 
 	/// <summary>
+	/// Gets longest word matching the prefix from the Trie.
+	/// </summary>
+	public string GetLongestPrefixMatch(string prefix)
+	{
+		if (prefix == null)
+		{
+			throw new ArgumentNullException(nameof(prefix));
+		}
+		return GetLongestPrefixMatch(rootTrieNode, prefix);
+	}
+
+	/// <summary>
 	/// Clears all words from the Trie.
 	/// </summary>
 	public void Clear()
@@ -305,6 +317,33 @@ public class Trie : ITrie
 			GetShortestWords(child, shortestWords, buffer, length);
 			buffer.Length--;
 		}
+	}
+
+	/// <summary>
+	/// Gets longest word matching the prefix from the Trie.
+	/// </summary>
+	private string GetLongestPrefixMatch(TrieNode trieNode, string prefix)
+	{
+		string longestPrefixMatch = null;
+		var buffer = new StringBuilder();
+		if (trieNode.IsWord)
+		{
+			longestPrefixMatch = buffer.ToString();
+		}
+		foreach (var prefixChar in prefix)
+		{
+			trieNode = trieNode.GetChild(prefixChar);
+			if (trieNode == null)
+			{
+				break;
+			}
+			buffer.Append(prefixChar);
+			if (trieNode.IsWord)
+			{
+				longestPrefixMatch = buffer.ToString();
+			}
+		}
+		return longestPrefixMatch;
 	}
 
 	/// <summary>

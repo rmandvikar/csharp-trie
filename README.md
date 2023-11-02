@@ -105,6 +105,9 @@ var longestWords = trie.GetLongestWords();
 // Gets shortest words.
 var shortestWords = trie.GetShortestWords();
 
+// Gets longest prefix match.
+var longestPrefixMatch = trie.GetLongestPrefixMatch();
+
 // Clears all words.
 trie.Clear();
 

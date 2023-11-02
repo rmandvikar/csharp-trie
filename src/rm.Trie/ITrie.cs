@@ -68,6 +68,11 @@ public interface ITrie
 	ICollection<string> GetShortestWords();
 
 	/// <summary>
+	/// Gets longest word matching the prefix from the Trie.
+	/// </summary>
+	string GetLongestPrefixMatch(string prefix);
+
+	/// <summary>
 	/// Clears all words from the Trie.
 	/// </summary>
 	void Clear();
