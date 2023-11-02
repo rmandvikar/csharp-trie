@@ -237,6 +237,37 @@ public class TrieTest
 	}
 
 	[Test]
+	[TestCase("test", "tester")]
+	[TestCase("123", "1234-bomb!")]
+	public void GetLongestPrefixMatch01(string expected, string word)
+	{
+		var trie = BuildSampleTrie();
+		var longestPrefixMatch = trie.GetLongestPrefixMatch(word);
+		Assert.AreEqual(expected, longestPrefixMatch);
+	}
+
+	[Test]
+	[TestCase("", "bomb!")]
+	public void GetLongestPrefixMatch02(string expected, string word)
+	{
+		var trie = BuildSampleTrie();
+		trie.AddWord("");
+		var longestPrefixMatch = trie.GetLongestPrefixMatch(word);
+		Assert.AreEqual(expected, longestPrefixMatch);
+	}
+
+	[Test]
+	[TestCase("cater", "caterer")]
+	[TestCase("base", "basemexy")]
+	[TestCase(null, "child")]
+	public void GetLongestPrefixMatch03(string expected, string word)
+	{
+		var trie = BuildSampleTrie2();
+		var longestPrefixMatch = trie.GetLongestPrefixMatch(word);
+		Assert.AreEqual(expected, longestPrefixMatch);
+	}
+
+	[Test]
 	public void Clear01()
 	{
 		var trie = BuildSampleTrie();
@@ -303,6 +334,21 @@ public class TrieTest
 		{
 			"123", "1", "23", "1",
 			"this", "test", "the", "TEMP", "TOKEN", "TAKE", "THUMP"
+		};
+
+		foreach (string s in strings)
+		{
+			trie.AddWord(s);
+		}
+		return trie;
+	}
+
+	private ITrie BuildSampleTrie2()
+	{
+		ITrie trie = new Trie();
+		string[] strings =
+		{
+			"are", "area", "base", "cat", "cater", "children", "basement"
 		};
 
 		foreach (string s in strings)

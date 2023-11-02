@@ -105,6 +105,9 @@ var longestWords = trie.GetLongestWords();
 // Gets shortest words.
 var shortestWords = trie.GetShortestWords();
 
+// Gets longest prefix match.
+var longestPrefixMatch = trie.GetLongestPrefixMatch();
+
 // Clears all words.
 trie.Clear();
 
@@ -160,6 +163,9 @@ void Remove(string key);
 // Removes key prefix from TrieMap and return true else false.
 bool RemoveKeyPrefix(string keyPrefix);
 
+// Gets string->TValue pair for longest prefix matching the word from the Trie.
+KeyValuePair<string, TValue>? GetLongestPrefixMatch(string word);
+
 // Clears all values from TrieMap.
 void Clear();
 
@@ -210,6 +216,9 @@ trieMap.Remove("key"); // throws
 
 // Removes by key prefix.
 bool isKeyPrefixRemoved = trieMap.RemoveKeyPrefix("key"); // isKeyPrefixRemoved = true
+
+// Get key-value item for longest prefix matching the word.
+KeyValuePair<string, TValue>? kvPairForKey12 = trieMapGetLongestPrefixMatch("key12345");
 
 // Clears triemap.
 trieMap.Clear();

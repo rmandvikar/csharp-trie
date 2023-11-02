@@ -249,6 +249,28 @@ public class TrieMapTest
 	}
 
 	[Test]
+	public void GetLongestPrefixMatch01()
+	{
+		var trie = BuildSampleTrie();
+		var trieO = BuildSampleTrieO();
+		var value = trie.GetLongestPrefixMatch("key1234-bomb!");
+		var valueO = trieO.GetLongestPrefixMatch("key1234-bomb!");
+		Assert.AreEqual("key123", value.Value.Key);
+		Assert.AreEqual("key123", valueO.Value.Key);
+	}
+
+	[Test]
+	public void GetLongestPrefixMatch02()
+	{
+		var trie = BuildSampleTrie();
+		var trieO = BuildSampleTrieO();
+		var value = trie.GetLongestPrefixMatch("bomb!");
+		var valueO = trieO.GetLongestPrefixMatch("bomb!");
+		Assert.IsNull(value);
+		Assert.IsNull(valueO);
+	}
+
+	[Test]
 	public void Clear01()
 	{
 		var trie = BuildSampleTrie();
