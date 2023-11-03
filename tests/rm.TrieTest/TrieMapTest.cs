@@ -249,6 +249,46 @@ public class TrieMapTest
 	}
 
 	[Test]
+	public void GetLongestKeyValuePairs01()
+	{
+		var trie = BuildSampleTrie();
+		trie.Add("the longest word", 1337);
+		var expected = new[] { new KeyValuePair<string, int>("the longest word", 1337) };
+		var longestKeyValuePairs = trie.GetLongestKeyValuePairs();
+		Assert.AreEqual(expected, longestKeyValuePairs);
+	}
+
+	[Test]
+	public void GetLongestKeyValuePairs02()
+	{
+		var trie = BuildSampleTrie();
+		trie.Add("the longest word1", 1337);
+		trie.Add("the longest word2", 1337);
+		var expected = new[] { new KeyValuePair<string, int>("the longest word1", 1337), new KeyValuePair<string, int>("the longest word2", 1337) };
+		var longestKeyValuePairs = trie.GetLongestKeyValuePairs();
+		Assert.AreEqual(expected, longestKeyValuePairs);
+	}
+
+	[Test]
+	public void GetShortestKeyValuePairs01()
+	{
+		var trie = BuildSampleTrie();
+		var expected = new[] { new KeyValuePair<string, int>("key1", 1) };
+		var shortestKeyValuePairs = trie.GetShortestKeyValuePairs();
+		Assert.AreEqual(expected, shortestKeyValuePairs);
+	}
+
+	[Test]
+	public void GetShortestKeyValuePairs02()
+	{
+		var trie = BuildSampleTrie();
+		trie.Add("keya", 1337);
+		var expected = new[] { new KeyValuePair<string, int>("key1", 1), new KeyValuePair<string, int>("keya", 1337) };
+		var shortestKeyValuePairs = trie.GetShortestKeyValuePairs();
+		Assert.AreEqual(expected, shortestKeyValuePairs);
+	}
+
+	[Test]
 	public void GetLongestPrefixMatch01()
 	{
 		var trie = BuildSampleTrie();
