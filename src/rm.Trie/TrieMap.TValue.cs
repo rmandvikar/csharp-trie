@@ -205,6 +205,30 @@ public class TrieMap<TValue> : ITrieMap<TValue>
 	}
 
 	/// <summary>
+	/// Gets string->TValue pairs for longest keys from the Trie.
+	/// </summary>
+	public IEnumerable<KeyValuePair<string, TValue>> GetLongestKeyValuePairs()
+	{
+		var longestKeyValuePairs = new List<KeyValuePair<string, TValue>>();
+		var buffer = new StringBuilder();
+		var length = new Wrapped<int>(0);
+		GetLongestKeyValuePairs(rootTrieNode, longestKeyValuePairs, buffer, length);
+		return longestKeyValuePairs;
+	}
+
+	/// <summary>
+	/// Gets string->TValue pairs for shortest keys from the Trie.
+	/// </summary>
+	public IEnumerable<KeyValuePair<string, TValue>> GetShortestKeyValuePairs()
+	{
+		var shortestKeyValuePairs = new List<KeyValuePair<string, TValue>>();
+		var buffer = new StringBuilder();
+		var length = new Wrapped<int>(int.MaxValue);
+		GetShortestKeyValuePairs(rootTrieNode, shortestKeyValuePairs, buffer, length);
+		return shortestKeyValuePairs;
+	}
+
+	/// <summary>
 	/// Gets string->TValue pair for longest prefix matching the word from the Trie.
 	/// </summary>
 	public KeyValuePair<string, TValue>? GetLongestPrefixMatch(string word)
@@ -258,6 +282,52 @@ public class TrieMap<TValue> : ITrieMap<TValue>
 			{
 				yield return item;
 			}
+			buffer.Length--;
+		}
+	}
+
+	private void GetLongestKeyValuePairs(TrieNode<TValue> trieNode,
+		ICollection<KeyValuePair<string, TValue>> longestKeyValuePairs, StringBuilder buffer, Wrapped<int> length)
+	{
+		if (trieNode.HasValue())
+		{
+			if (buffer.Length > length.Value)
+			{
+				longestKeyValuePairs.Clear();
+				length.Value = buffer.Length;
+			}
+			if (buffer.Length == length.Value)
+			{
+				longestKeyValuePairs.Add(new KeyValuePair<string, TValue>(buffer.ToString(), trieNode.Value));
+			}
+		}
+		foreach (var child in trieNode.GetChildren())
+		{
+			buffer.Append(child.Character);
+			GetLongestKeyValuePairs(child, longestKeyValuePairs, buffer, length);
+			buffer.Length--;
+		}
+	}
+
+	private void GetShortestKeyValuePairs(TrieNode<TValue> trieNode,
+		ICollection<KeyValuePair<string, TValue>> shortestKeyValuePairs, StringBuilder buffer, Wrapped<int> length)
+	{
+		if (trieNode.HasValue())
+		{
+			if (buffer.Length < length.Value)
+			{
+				shortestKeyValuePairs.Clear();
+				length.Value = buffer.Length;
+			}
+			if (buffer.Length == length.Value)
+			{
+				shortestKeyValuePairs.Add(new KeyValuePair<string, TValue>(buffer.ToString(), trieNode.Value));
+			}
+		}
+		foreach (var child in trieNode.GetChildren())
+		{
+			buffer.Append(child.Character);
+			GetShortestKeyValuePairs(child, shortestKeyValuePairs, buffer, length);
 			buffer.Length--;
 		}
 	}

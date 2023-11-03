@@ -217,6 +217,12 @@ trieMap.Remove("key"); // throws
 // Removes by key prefix.
 bool isKeyPrefixRemoved = trieMap.RemoveKeyPrefix("key"); // isKeyPrefixRemoved = true
 
+// Gets string->TValue pairs for longest keys from the Trie.
+IEnumerable<KeyValuePair<string, TValue>> longestKeyValuePairs = trieMap.GetLongestKeyValuePairs();
+
+// Gets string->TValue pairs for shortest keys from the Trie.
+IEnumerable<KeyValuePair<string, TValue>> shortestKeyValuePairs = trieMap.GetShortestKeyValuePairs();
+
 // Get key-value item for longest prefix matching the word.
 KeyValuePair<string, TValue>? kvPairForKey12 = trieMapGetLongestPrefixMatch("key12345");
 

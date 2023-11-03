@@ -75,6 +75,16 @@ public interface ITrieMap<TValue>
 	bool RemoveKeyPrefix(string keyPrefix);
 
 	/// <summary>
+	/// Gets string->TValue pairs for longest keys from the Trie.
+	/// </summary>
+	IEnumerable<KeyValuePair<string, TValue>> GetLongestKeyValuePairs();
+
+	/// <summary>
+	/// Gets string->TValue pairs for shortest keys from the Trie.
+	/// </summary>
+	IEnumerable<KeyValuePair<string, TValue>> GetShortestKeyValuePairs();
+
+	/// <summary>
 	/// Gets string->TValue pair for longest prefix matching the word from the Trie.
 	/// </summary>
 	KeyValuePair<string, TValue>? GetLongestPrefixMatch(string word);
