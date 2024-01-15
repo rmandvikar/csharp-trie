@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rm.TrieTest", "tests\rm.Tri
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16025984-A368-4B45-8B6C-847A809AF3BC}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
