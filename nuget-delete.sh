@@ -11,7 +11,7 @@ if [[ -z "$version" ]]; then
 	exit 1
 fi
 
-dotnet nuget delete rm.Trie "$version" \
+dotnet nuget delete rmandvikar.Trie "$version" \
 	-k $(< ~/dump/.nuget.apikey) \
 	-s https://api.nuget.org/v3/index.json \
 	--non-interactive

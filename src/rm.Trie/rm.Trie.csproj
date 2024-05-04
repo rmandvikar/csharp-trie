@@ -8,6 +8,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>1591;NU1507</NoWarn>
     <LangVersion>latest</LangVersion>
+    <PackageId>rmandvikar.Trie</PackageId>
     <Description>A trie (prefix tree) data structure implementation in C#.</Description>
     <PackageTags>trie prefix tree</PackageTags>
     <RepositoryUrl>https://github.com/rmandvikar/csharp-trie</RepositoryUrl>
